@@ -774,7 +774,7 @@ document.getElementById('report_mode').addEventListener("click", function() {
     mode = "report_mode";
     $('#panel').hide();
     $('#reportTools').show(200, function() {
-        document.getElementById('reportTotalSurface').innerHTML = "Total de la surface : <b>" + (globalArea / 3600).toFixed(1) + "</b> m²";
+        document.getElementById('reportTotalSurface').innerHTML = "Total de la surface : " + formatArea(getArea(globalArea), 1, function(x) { return `<b>${x}</b>`;});
         $('#reportTotalSurface').show(1000);
         document.getElementById('reportNumberSurface').innerHTML = "Nombre pièces : <b>" + ROOM.length + "</b>";
         $('#reportNumberSurface').show(1000);
@@ -784,7 +784,8 @@ document.getElementById('report_mode').addEventListener("click", function() {
             var nameRoom = "Pièce n°" + number + " <small>(sans nom)</small>";
             if (ROOM[k].name != "") nameRoom = ROOM[k].name;
             reportRoom += '<div class="col-md-6"><p>' + nameRoom + '</p></div>\n';
-            reportRoom += '<div class="col-md-6"><p>Surface : <b>' + ((ROOM[k].area) / 3600).toFixed(2) + '</b> m²</p></div>\n';
+            // reportRoom += '<div class="col-md-6"><p>Surface : <b>' + ((ROOM[k].area) / 3600).toFixed(2) + '</b> m²</p></div>\n';
+            reportRoom += '<div class="col-md-6"><p>Surface : ' + formatArea(getArea((ROOM[k].area)), 2, function(x) { return `<b>${x}</b>`; }) + '</p></div>\n';
             number++;
         }
         reportRoom += '</div><hr/>\n';
@@ -2022,7 +2023,8 @@ function rib(shift = 5) {
                         sizeText[n].setAttributeNS(null, 'text-anchor', 'middle');
                         sizeText[n].setAttributeNS(null, 'font-family', 'roboto');
                         sizeText[n].setAttributeNS(null, 'stroke', '#ffffff');
-                        sizeText[n].textContent = valueText.toFixed(2);
+                        // sizeText[n].textContent = valueText.toFixed(2);
+                        sizeText[n].textContent = formatLength(valueText);
                         if (sizeText[n].textContent < 1) {
                             sizeText[n].setAttributeNS(null, 'font-size', '0.73em');
                             sizeText[n].textContent = sizeText[n].textContent.substring(1, sizeText[n].textContent.length);

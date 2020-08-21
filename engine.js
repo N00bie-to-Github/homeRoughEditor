@@ -806,14 +806,14 @@ function _MOUSEMOVE(event) {
                     lengthTemp.setAttributeNS(null, 'stroke', 'none');
                     lengthTemp.setAttributeNS(null, 'stroke-width', '0.6px');
                     lengthTemp.setAttributeNS(null, 'fill', '#777777');
-                    lengthTemp.textContent = valueText + 'm';
+                    lengthTemp.textContent = formatLength(valueText);
                     $('#boxbind').append(lengthTemp);
                 }
                 if (typeof(lengthTemp) != 'undefined' && valueText > 0.1) {
                     lengthTemp.setAttributeNS(null, 'x', startText.x);
                     lengthTemp.setAttributeNS(null, 'y', (startText.y) - 15);
                     lengthTemp.setAttribute("transform", "rotate(" + angleText.deg + " " + startText.x + "," + startText.y + ")");
-                    lengthTemp.textContent = valueText + ' m';
+                    lengthTemp.textContent = formatLength(valueText);
                 }
                 if (typeof(lengthTemp) != 'undefined' && valueText < 0.1) {
                     lengthTemp.textContent = "";
@@ -871,7 +871,8 @@ function _MOUSEMOVE(event) {
                     cy: coords.y
                 });
                 cursor('grab');
-            } else {
+            }
+            else {
                 if (magnetic != false) {
                     if (magnetic == "H") snap.x = coords.x;
                     else snap.y = coords.y;
@@ -1671,7 +1672,8 @@ function _MOUSEUP(event) {
             if (document.getElementById("multi").checked && !wallEndConstruc) {
                 cursor('validation');
                 action = 1;
-            } else action = 0;
+            }
+            else action = 0;
             $('#boxinfo').html('Wall added <span style=\'font-size:0.6em\'>Moy. ' + (qSVG.measure({
                 x: pox,
                 y: poy
@@ -1688,7 +1690,8 @@ function _MOUSEUP(event) {
             pox = x;
             poy = y;
             save();
-        } else {
+        }
+        else {
             action = 0;
             construc = 0;
             $('#boxinfo').html('Select mode');
@@ -1748,6 +1751,7 @@ function _MOUSEUP(event) {
                     document.getElementById('wallWidth').setAttribute('max', 50);
                     document.getElementById('wallWidthScale').textContent = "7-50";
                     document.getElementById("wallWidth").value = binder.wall.thick;
+                    // Wall thickness **__
                     document.getElementById("wallWidthVal").textContent = binder.wall.thick;
                     mode = 'edit_wall_mode';
                 }
@@ -1768,6 +1772,7 @@ function _MOUSEUP(event) {
                         document.getElementById('doorWindowWidth').setAttribute('max', binder.obj.params.resizeLimit.width.max);
                         document.getElementById('doorWindowWidthScale').textContent = binder.obj.params.resizeLimit.width.min + "-" + binder.obj.params.resizeLimit.width.max;
                         document.getElementById("doorWindowWidth").value = binder.obj.size;
+                        // Door width
                         document.getElementById("doorWindowWidthVal").textContent = binder.obj.size;
                     });
                     mode = 'edit_door_mode';
