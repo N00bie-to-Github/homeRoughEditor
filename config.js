@@ -11,5 +11,9 @@ var Settings = {
         max: 50.8,
         // The default thickeness
         width: 11.43
+    },
+    language: {
+        MODE_SELECTION: 'Mode Selection',
+        LABEL_BOX_TEXT: 'Your Text'
     }
 }

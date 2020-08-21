@@ -36,13 +36,13 @@ function formatSmallLength(value, includeUnit) {
     if(Settings.unitSystem === 'imperial') {
         return roundInches(0.393701 * value) + (includeUnit ? ' inch' : '');
     }
-    
+
     return value + (includeUnit ? ' cm' : '')
 }
 
 function footInch(length, prec) {
     prec = typeof prec === 'undefined' ? Settings.imperial.decimalPlaces : prec;
-console.log(prec)
+
     var feet = Math.floor(length);
     var inch = length-feet;
 

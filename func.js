@@ -1133,9 +1133,9 @@ $('#textToLayer').on('hidden.bs.modal', function(e) {
         $('#boxinfo').html('Texte ajouté');
         save();
     } else {
-        $('#boxinfo').html('Mode sélection');
+        $('#boxinfo').html(Settings.language.MODE_SELECTION);
     }
-    document.getElementById('labelBox').textContent = "Votre texte";
+    document.getElementById('labelBox').textContent = Settings.language.LABEL_BOX_TEXT;
     document.getElementById('labelBox').style.color = "#333333";
     document.getElementById('labelBox').style.fontSize = "15px";
     document.getElementById('sizePolice').value = 15;
@@ -1813,6 +1813,7 @@ function inWallRib(wall, option = false) {
         for (var n = 1; n < ribMaster[t].length; n++) {
             var found = true;
             var shift = -5;
+            // The text which is set on wall hover
             var valueText = Math.abs(ribMaster[t][n - 1].distance - ribMaster[t][n].distance);
             var angleText = angleTextValue;
             if (found) {
@@ -1835,7 +1836,8 @@ function inWallRib(wall, option = false) {
                 sizeText[n].setAttributeNS(null, 'text-anchor', 'middle');
                 sizeText[n].setAttributeNS(null, 'font-family', 'roboto');
                 sizeText[n].setAttributeNS(null, 'stroke', '#ffffff');
-                sizeText[n].textContent = valueText.toFixed(2);
+                // Set the text on hover over wall
+                sizeText[n].textContent = formatLength(valueText);
                 if (sizeText[n].textContent < 1) {
                     sizeText[n].setAttributeNS(null, 'font-size', '0.8em');
                     sizeText[n].textContent = sizeText[n].textContent.substring(1, sizeText[n].textContent.length);

@@ -453,7 +453,8 @@ function _MOUSEMOVE(event) {
                     if (!objTarget.params.move) cursor('trash'); // LIKE MEASURE ON PLAN
                     if (objTarget.params.move) cursor('move');
                 }
-            } else { // DOOR, WINDOW, APERTURE.. -- OBJ WITHOUT BINDBOX (params.bindBox = False) -- !!!!
+            }
+            else { // DOOR, WINDOW, APERTURE.. -- OBJ WITHOUT BINDBOX (params.bindBox = False) -- !!!!
                 if (typeof(binder) == 'undefined') {
                     var wallList = editor.rayCastingWall(objTarget);
                     if (wallList.length > 1) wallList = wallList[0];
@@ -469,7 +470,8 @@ function _MOUSEMOVE(event) {
                         y: objTarget.y
                     }; // FOR OBJECT MENU
                     $('#boxbind').append(binder.graph);
-                } else {
+                }
+                else {
                     if (event.target == binder.graph.get(0).firstChild) {
                         cursor('move');
                         binder.graph.get(0).firstChild.setAttribute("class", "circle_css_2");
@@ -482,7 +484,8 @@ function _MOUSEMOVE(event) {
                     }
                 }
             }
-        } else {
+        }
+        else {
             if (typeof(binder) != 'undefined') {
                 if (typeof(binder.graph) != 'undefined') binder.graph.remove();
                 else binder.remove();
@@ -506,7 +509,8 @@ function _MOUSEMOVE(event) {
                 binder.data = wallNode;
                 binder.type = "node";
                 if ($('#linebinder').length) $('#linebinder').remove();
-            } else {
+            }
+            else {
                 // REMAKE CIRCLE_CSS ON BINDER AND TAKE DATA SEG GROUP
                 // if (typeof(binder) != 'undefined') {
                 //     binder.attr({
@@ -515,7 +519,8 @@ function _MOUSEMOVE(event) {
                 // }
             }
             cursor('move');
-        } else {
+        }
+        else {
             if (typeof(binder) != "undefined" && binder.type == 'node') {
                 binder.remove();
                 delete binder;
@@ -527,6 +532,8 @@ function _MOUSEMOVE(event) {
 
 
         // BIND WALL WITH NEARPOINT function ---> WALL BINDER CREATION
+        // Mouseover wall
+
         if (wallBind = editor.rayCastingWalls(snap, WALLS)) {
             if (wallBind.length > 1) wallBind = wallBind[wallBind.length - 1];
             if (wallBind && typeof(binder) == 'undefined') {
@@ -563,7 +570,8 @@ function _MOUSEMOVE(event) {
                 binder.type = "segment";
                 cursor('pointer');
             }
-        } else {
+        }
+        else {
             if (wallBind = editor.nearWall(snap, 6)) {
                 if (wallBind && typeof(binder) == 'undefined') {
                     wallBind = wallBind.wall;
@@ -600,7 +608,8 @@ function _MOUSEMOVE(event) {
                     binder.type = "segment";
                     cursor('pointer');
                 }
-            } else {
+            }
+            else {
                 if (typeof(binder) != "undefined" && binder.type == 'segment') {
                     binder.graph.remove();
                     delete binder;

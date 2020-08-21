@@ -1110,7 +1110,7 @@ var editor = {
             text.setAttributeNS(null, 'y', ((maxY + minY) / 2) + 35);
             text.setAttributeNS(null, 'fill', '#555');
             text.setAttributeNS(null, 'text-anchor', 'middle');
-            text.textContent = labelHeight + ' m';
+            text.textContent = formatLength(labelHeight);
             text.setAttribute("transform", "rotate(270 " + (maxX + 70) + "," + (maxY + minY) / 2 + ")");
             $('#boxScale').append(text);
 
@@ -1119,7 +1119,7 @@ var editor = {
             text.setAttributeNS(null, 'y', (minY - 95));
             text.setAttributeNS(null, 'fill', '#555');
             text.setAttributeNS(null, 'text-anchor', 'middle');
-            text.textContent = labelWidth + ' m';
+            text.textContent = formatLength(labelWidth);
             $('#boxScale').append(text);
 
         }
