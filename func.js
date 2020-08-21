@@ -54,7 +54,7 @@ function initHistory(boot = false) {
         HISTORY.push({
             "objData": [],
             "wallData": [{
-                "thick": 20,
+                "thick": Settings.wall.width,
                 "start": {
                     "x": 540,
                     "y": 194
@@ -100,7 +100,7 @@ function initHistory(boot = false) {
                     "length": 1
                 }
             }, {
-                "thick": 20,
+                "thick": Settings.wall.width,
                 "start": {
                     "x": 540,
                     "y": 734
@@ -146,7 +146,7 @@ function initHistory(boot = false) {
                     "length": 1
                 }
             }, {
-                "thick": 20,
+                "thick": Settings.wall.width,
                 "start": {
                     "x": 1080,
                     "y": 734
@@ -192,7 +192,7 @@ function initHistory(boot = false) {
                     "length": 1
                 }
             }, {
-                "thick": 20,
+                "thick": Settings.wall.width,
                 "start": {
                     "x": 1080,
                     "y": 194
@@ -307,7 +307,7 @@ function initHistory(boot = false) {
         HISTORY.push({
             "objData": [],
             "wallData": [{
-                "thick": 20,
+                "thick": Settings.wall.width,
                 "start": {
                     "x": 447,
                     "y": 458
@@ -353,7 +353,7 @@ function initHistory(boot = false) {
                     "length": 1
                 }
             }, {
-                "thick": 20,
+                "thick": Settings.wall.width,
                 "start": {
                     "x": 447,
                     "y": 744
@@ -399,7 +399,7 @@ function initHistory(boot = false) {
                     "length": 1
                 }
             }, {
-                "thick": 20,
+                "thick": Settings.wall.width,
                 "start": {
                     "x": 1347,
                     "y": 744
@@ -445,7 +445,7 @@ function initHistory(boot = false) {
                     "length": 1
                 }
             }, {
-                "thick": 20,
+                "thick": Settings.wall.width,
                 "start": {
                     "x": 1347,
                     "y": 144
@@ -491,7 +491,7 @@ function initHistory(boot = false) {
                     "length": 1
                 }
             }, {
-                "thick": 20,
+                "thick": Settings.wall.width,
                 "start": {
                     "x": 1020,
                     "y": 144
@@ -537,7 +537,7 @@ function initHistory(boot = false) {
                     "length": 1
                 }
             }, {
-                "thick": 20,
+                "thick": Settings.wall.width,
                 "start": {
                     "x": 1020,
                     "y": 458
@@ -1000,6 +1000,7 @@ document.getElementById('report_mode').addEventListener("click", function() {
 
 document.getElementById('wallWidth').addEventListener("input", function() {
     var sliderValue = this.value;
+    //Initial wall thickness
     binder.wall.thick = sliderValue;
     binder.wall.type = "normal";
     editor.architect(WALLS);
@@ -1009,7 +1010,7 @@ document.getElementById('wallWidth').addEventListener("input", function() {
         objWall[w].update();
     }
     rib();
-    document.getElementById("wallWidthVal").textContent = sliderValue;
+    document.getElementById("wallWidthVal").textContent = formatSmallLength(sliderValue);
 });
 
 document.getElementById("bboxTrash").addEventListener("click", function() {

@@ -1747,12 +1747,12 @@ function _MOUSEUP(event) {
                         $('#boxinfo').html('Modify the wall');
                     }
                     $('#wallTools').show(200);
-                    document.getElementById('wallWidth').setAttribute('min', 7);
-                    document.getElementById('wallWidth').setAttribute('max', 50);
-                    document.getElementById('wallWidthScale').textContent = "7-50";
+                    document.getElementById('wallWidth').setAttribute('min', Settings.wall.min);
+                    document.getElementById('wallWidth').setAttribute('max', Settings.wall.max);
+                    document.getElementById('wallWidthScale').textContent = formatSmallLength(Settings.wall.min, false)+'-'+formatSmallLength(Settings.wall.max, false);
                     document.getElementById("wallWidth").value = binder.wall.thick;
                     // Wall thickness **__
-                    document.getElementById("wallWidthVal").textContent = binder.wall.thick;
+                    document.getElementById("wallWidthVal").textContent = formatSmallLength(binder.wall.thick);
                     mode = 'edit_wall_mode';
                 }
                 delete equation1;

@@ -25,11 +25,29 @@ function formatArea(area, prec, wrapper) {
 
 }
 
-function footInch(length, prec) {
-    prec = typeof prec === 'undefined' ? 2 : prec;
+function roundInches(inch) {
+    var fraction = Settings.imperial.fraction;
+    return round(inch * fraction, 0) / fraction;
+}
+
+function formatSmallLength(value, includeUnit) {
+    includeUnit = typeof includeUnit === 'undefined' ? true : includeUnit;
+
+    if(Settings.unitSystem === 'imperial') {
+        return roundInches(0.393701 * value) + (includeUnit ? ' inch' : '');
+    }
     
+    return value + (includeUnit ? ' cm' : '')
+}
+
+function footInch(length, prec) {
+    prec = typeof prec === 'undefined' ? Settings.imperial.decimalPlaces : prec;
+console.log(prec)
     var feet = Math.floor(length);
     var inch = length-feet;
+
+    // Round to the nearest 16 by default
+    inch = roundInches(inch);
     return  {
         feet: feet,
         inch: round(inch*12, prec)
