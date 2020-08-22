@@ -623,7 +623,8 @@ var editor = {
                     sizeText[n].setAttributeNS(null, 'text-anchor', 'middle');
                     sizeText[n].setAttributeNS(null, 'font-family', 'roboto');
                     sizeText[n].setAttributeNS(null, 'stroke', '#ffffff');
-                    sizeText[n].textContent = valueText.toFixed(2);
+                    // sizeText[n].textContent = valueText.toFixed(2);
+                    sizeText[n].textContent = formatLength(valueText);
                     if (sizeText[n].textContent < 1) {
                         sizeText[n].setAttributeNS(null, 'font-size', '0.8em');
                         sizeText[n].textContent = sizeText[n].textContent.substring(1, sizeText[n].textContent.length);
@@ -717,7 +718,6 @@ var editor = {
 
 
         this.update = function() {
-            console.log("update")
             this.width = (this.size / meter).toFixed(2);
             this.height = (this.thick / meter).toFixed(2);
             cc = carpentryCalc(this.class, this.type, this.size, this.thick, this.value);

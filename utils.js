@@ -40,6 +40,10 @@ function formatSmallLength(value, includeUnit) {
     return value + (includeUnit ? ' cm' : '')
 }
 
+function getScale(ratioWidthZoom) {
+    return 0.3048 * 500 * ratioWidthZoom + 'px';
+}
+
 function footInch(length, prec) {
     prec = typeof prec === 'undefined' ? Settings.imperial.decimalPlaces : prec;
 

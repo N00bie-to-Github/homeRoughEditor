@@ -219,7 +219,7 @@ function _MOUSEMOVE(event) {
                 binder.x = startText.x;
                 binder.y = startText.y;
                 binder.angle = angleText.deg;
-                valueText = (valueText / meter).toFixed(2) + ' m';
+                valueText = formatLength(valueText / meter);
                 labelMeasure.context.textContent = valueText;
                 binder.update();
             }
@@ -287,7 +287,7 @@ function _MOUSEMOVE(event) {
             if (wall.type != 'separate') {
                 if (typeof(binder) == 'undefined') {
                     // family, classe, type, pos, angle, angleSign, size, hinge, thick
-                    binder = new editor.obj2D("inWall", "doorWindow", modeOption, wallSelect, 0, 0, 60, "normal", wall.thick);
+                    binder = new editor.obj2D("inWall", "doorWindow", modeOption, wallSelect, 0, 0, Settings.door.default, "normal", wall.thick);
                     var angleWall = qSVG.angleDeg(wall.start.x, wall.start.y, wall.end.x, wall.end.y);
                     var v1 = qSVG.vectorXY({
                         x: wall.start.x,
@@ -1752,7 +1752,7 @@ function _MOUSEUP(event) {
                         $('#separate').show();
                         $('#rangeThick').show();
                         $('#recombine').hide();
-                        document.getElementById('titleWallTools').textContent = "Modify the wall";
+                        document.getElementById('titleWallTools').textContent = Settings.language.MODIFY_WALL_TEXT;
                         $('#boxinfo').html('Modify the wall');
                     }
                     $('#wallTools').show(200);
@@ -1779,10 +1779,10 @@ function _MOUSEUP(event) {
                         $('#boxinfo').html('Config. the door/window');
                         document.getElementById('doorWindowWidth').setAttribute('min', binder.obj.params.resizeLimit.width.min);
                         document.getElementById('doorWindowWidth').setAttribute('max', binder.obj.params.resizeLimit.width.max);
-                        document.getElementById('doorWindowWidthScale').textContent = binder.obj.params.resizeLimit.width.min + "-" + binder.obj.params.resizeLimit.width.max;
+                        document.getElementById('doorWindowWidthScale').textContent = formatSmallLength(binder.obj.params.resizeLimit.width.min, false) + "-" + formatSmallLength(binder.obj.params.resizeLimit.width.max, false);
                         document.getElementById("doorWindowWidth").value = binder.obj.size;
                         // Door width
-                        document.getElementById("doorWindowWidthVal").textContent = binder.obj.size;
+                        document.getElementById("doorWindowWidthVal").textContent = formatSmallLength(binder.obj.size);
                     });
                     mode = 'edit_door_mode';
 

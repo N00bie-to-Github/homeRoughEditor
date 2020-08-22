@@ -4,6 +4,10 @@ var Settings = {
         decimalPlaces: 3,
         fraction: 16
     },
+    config: {
+        meter: 100,
+        gridSize: 10
+    },
     wall: {
         // Minimum thickness in cm
         min: 7,
@@ -12,8 +16,18 @@ var Settings = {
         // The default thickeness
         width: 11.43
     },
+    door: {
+        default: 76.2
+    },
     language: {
-        MODE_SELECTION: 'Mode Selection',
-        LABEL_BOX_TEXT: 'Your Text'
+        MODE_SELECTION_TEXT: 'Mode Selection',
+        LABEL_BOX_TEXT: 'Your Text',
+        MODIFY_WALL_TEXT: 'Modify the wall',
+        CUT_WALL_TEXT: 'Cut a wall',
+        WALL_CUT_WARNING: 'Warning: Cutting a wall can result in loss of configuration',
+        ADD_DOOR_TEXT: 'Add a door',
+        ADD_WINDOW_TEXT: 'Add a window',
+        ADD_STAIRS_TEXT: 'Add stairs',
+        ADD_OBJECT_TEXT: 'Add an object',
     }
 }

@@ -547,3 +547,11 @@ html {
 #ex1Slider .slider-selection {
     background: #bec7cd;
 }
+
+.action-btn {
+    font-size: 20px;
+}
+
+.warning {
+    font-size: 200px;
+}

@@ -15,10 +15,10 @@ var modeOption;
 taille_w = $('#lin').width();
 taille_h = $('#lin').height();
 var offset = $('#lin').offset();
-grid = 20;
+grid = Settings.config.gridSize;
 showRib = true;
 showArea = true;
-meter = 60;
+meter = Settings.config.meter;
 grid_snap = 'off';
 colorbackground = "#ffffff";
 colorline = "#fff";
@@ -1088,7 +1088,7 @@ document.getElementById('doorWindowWidth').addEventListener("input", function() 
         binder.size = sliderValue;
         binder.limit = limits;
         binder.update();
-        document.getElementById("doorWindowWidthVal").textContent = sliderValue;
+        document.getElementById("doorWindowWidthVal").textContent = formatSmallLength(sliderValue);
     }
     inWallRib(wallBind);
 });
@@ -1133,7 +1133,7 @@ $('#textToLayer').on('hidden.bs.modal', function(e) {
         $('#boxinfo').html('Texte ajouté');
         save();
     } else {
-        $('#boxinfo').html(Settings.language.MODE_SELECTION);
+        $('#boxinfo').html(Settings.language.MODE_SELECTION_TEXT);
     }
     document.getElementById('labelBox').textContent = Settings.language.LABEL_BOX_TEXT;
     document.getElementById('labelBox').style.color = "#333333";
@@ -1347,7 +1347,7 @@ for (var k = 0; k < objTrashBtn.length; k++) {
         obj.graph.remove();
         OBJDATA.splice(OBJDATA.indexOf(obj), 1);
         fonc_button('select_mode');
-        $('#boxinfo').html('Mode sélection');
+        $('#boxinfo').html(Settings.language.MODE_SELECTION_TEXT);
         $('#panel').show('200');
         binder.graph.remove();
         delete binder;
@@ -1445,7 +1445,7 @@ function zoom_maker(lens, xmove, xview) {
         var ratioWidthZoom = taille_w / width_viewbox;
         height_viewbox = width_viewbox * ratio_viewbox;
         myDiv = document.getElementById("scaleVal");
-        myDiv.style.width = 60 * ratioWidthZoom + 'px';
+        myDiv.style.width = getScale(ratioWidthZoom);
         originX_viewbox = originX_viewbox - (xmove / 2);
         originY_viewbox = originY_viewbox - (xmove / 2 * ratio_viewbox);
     }
@@ -1456,7 +1456,7 @@ function zoom_maker(lens, xmove, xview) {
         var ratioWidthZoom = taille_w / width_viewbox;
         height_viewbox = width_viewbox * ratio_viewbox;
         myDiv = document.getElementById("scaleVal");
-        myDiv.style.width = 60 * ratioWidthZoom + 'px';
+        myDiv.style.width = getScale(ratioWidthZoom);
 
         originX_viewbox = originX_viewbox + (xmove / 2);
         originY_viewbox = originY_viewbox + (xmove / 2 * ratio_viewbox);
@@ -2181,14 +2181,14 @@ $('#rect_mode').click(function() {
 
 $('.door').click(function() {
     $('#lin').css('cursor', 'crosshair');
-    $('#boxinfo').html('Ajouter une porte');
+    $('#boxinfo').html(Settings.language.ADD_DOOR_TEXT);
     $('#door_list').hide(200);
     fonc_button('door_mode', this.id);
 });
 
 $('.window').click(function() {
     $('#lin').css('cursor', 'crosshair');
-    $('#boxinfo').html('Ajouter une fenêtre');
+    $('#boxinfo').html(Settings.language.ADD_WINDOW_TEXT);
     $('#door_list').hide(200);
     $('#window_list').hide(200);
     fonc_button('door_mode', this.id);
@@ -2196,18 +2196,18 @@ $('.window').click(function() {
 
 $('.object').click(function() {
     cursor('move');
-    $('#boxinfo').html('Ajouter un objet');
+    $('#boxinfo').html(Settings.language.ADD_OBJECT_TEXT);
     fonc_button('object_mode', this.id);
 });
 
 $('#stair_mode').click(function() {
     cursor('move');
-    $('#boxinfo').html('Ajouter un escalier');
+    $('#boxinfo').html(Settings.language.ADD_STAIRS_TEXT);
     fonc_button('object_mode', 'simpleStair');
 });
 
 $('#node_mode').click(function() {
-    $('#boxinfo').html('Couper un mur<br/><span style=\"font-size:0.7em\">Attention : Couper le mur d\'une pièce peut annuler sa configuration</span>');
+    $('#boxinfo').html(Settings.language.CUT_WALL_TEXT+'<br/><span class="text-danger" style=\"font-size:0.7em\;">'+Settings.language.WALL_CUT_WARNING+'</span>');
     fonc_button('node_mode');
 });
 
