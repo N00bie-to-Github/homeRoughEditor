@@ -28,6 +28,18 @@ window.addEventListener('resize', function(event) {
     document.querySelector('#lin').setAttribute('viewBox', originX_viewbox + ' ' + originY_viewbox + ' ' + width_viewbox + ' ' + height_viewbox)
 });
 
+
+/**
+ * addWall - marks the wall being added. Each walls is assigned a uuid when added
+ *
+ * @param  {wall} wall\
+ */
+function addWall(wall) {
+    // generate and assign a uuid to the wall
+    wall.id = generateUUID();
+    WALLS.push(wall);
+}
+
 // *****************************************************************************************************
 // ******************************        KEYPRESS on KEYBOARD          *********************************
 // *****************************************************************************************************
@@ -278,7 +290,7 @@ function _MOUSEMOVE(event) {
     //**************************************************************************
     //**************        DOOR/WINDOW MODE   *********************************
     //**************************************************************************
-
+    // crumb: door
     if (mode == 'door_mode') {
 
         snap = calcul_snap(event, grid_snap);
@@ -357,7 +369,8 @@ function _MOUSEMOVE(event) {
                     }
                 }
             }
-        } else {
+        }
+        else {
             if (typeof(binder) != 'undefined') {
                 binder.graph.remove();
                 delete binder;
@@ -1333,7 +1346,8 @@ function _MOUSEDOWN(event) {
                             var newWall;
                             if (isObjectsEquals(wall.parent.end, wall.start, "1")) {
                                 newWall = new editor.wall(wall.parent.end, wall.start, "normal", wall.thick);
-                                WALLS.push(newWall);
+                                // WALLS.push(newWall);
+                                addWall(newWall);
                                 newWall.parent = wall.parent;
                                 newWall.child = wall;
                                 wall.parent.child = newWall;
@@ -1341,7 +1355,8 @@ function _MOUSEDOWN(event) {
                                 equation1 = qSVG.perpendicularEquation(equation2, wall.start.x, wall.start.y);
                             } else if (isObjectsEquals(wall.parent.start, wall.start, "2")) {
                                 newWall = new editor.wall(wall.parent.start, wall.start, "normal", wall.thick);
-                                WALLS.push(newWall);
+                                // WALLS.push(newWall);
+                                addWall(newWall);
                                 newWall.parent = wall.parent;
                                 newWall.child = wall;
                                 wall.parent.parent = newWall;
@@ -1391,7 +1406,8 @@ function _MOUSEDOWN(event) {
                         if (found) {
                             if (isObjectsEquals(wall.child.start, wall.end)) {
                                 var newWall = new editor.wall(wall.end, wall.child.start, "new", wall.thick);
-                                WALLS.push(newWall);
+                                // WALLS.push(newWall);
+                                addWall(newWall);
                                 newWall.parent = wall;
                                 newWall.child = wall.child;
                                 wall.child.parent = newWall;
@@ -1399,7 +1415,8 @@ function _MOUSEDOWN(event) {
                                 equation3 = qSVG.perpendicularEquation(equation2, wall.end.x, wall.end.y);
                             } else if (isObjectsEquals(wall.child.end, wall.end)) {
                                 var newWall = new editor.wall(wall.end, wall.child.end, "normal", wall.thick);
-                                WALLS.push(newWall);
+                                // WALLS.push(newWall);
+                                addWall(newWall);
                                 newWall.parent = wall;
                                 newWall.child = wall.child;
                                 wall.child.child = newWall;
@@ -1635,12 +1652,17 @@ function _MOUSEUP(event) {
     // *******************************************************************  ***** ****       ******  ******  ******  ***
 
     if (mode == 'door_mode') {
+        // crumb: new door
         if (typeof(binder) == "undefined") {
             $('#boxinfo').html('The plan currently contains no wall.');
             fonc_button('select_mode');
             return false;
         }
         OBJDATA.push(binder);
+        // Make a note of the wall that it's being added to. It would probably be
+        // better if an id was generated and a note of that was made
+        binder.wallId = wallSelect.wall.id;
+
         binder.graph.remove();
         $('#boxcarpentry').append(OBJDATA[OBJDATA.length - 1].graph);
         delete binder;
@@ -1675,7 +1697,10 @@ function _MOUSEUP(event) {
                 x: x,
                 y: y
             }, "normal", sizeWall);
-            WALLS.push(wall);
+            // crumb: add wall
+            addWall(wall);
+            // WALLS.push(wall);
+            // console.log(generateUUID())
             editor.architect(WALLS);
 
             if (document.getElementById("multi").checked && !wallEndConstruc) {
@@ -1783,6 +1808,8 @@ function _MOUSEUP(event) {
                         document.getElementById("doorWindowWidth").value = binder.obj.size;
                         // Door width
                         document.getElementById("doorWindowWidthVal").textContent = formatSmallLength(binder.obj.size);
+                        // Set the text input size
+                        document.getElementById("doorWindowWidthText").value = formatSmallLength(binder.obj.size, false);
                     });
                     mode = 'edit_door_mode';
 

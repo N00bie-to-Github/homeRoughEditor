@@ -15,7 +15,7 @@
 
 <body style="background:#efefef;margin:0;padding:0; ">
 
-    <header>Edité par Home Rough Editor Ver.0.91</header>
+    <header>Floor Planner</header>
 
     <svg id="lin" viewBox="0 0 1100 700" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg" style="z-index:2;margin:0;padding:0;width:100vw;height:100vh;position:absolute;top:0;left:0;right:0;bottom:0">
 
@@ -202,7 +202,8 @@
             <li><button class="btn btn-default fully" id="objToolsHinge">Reverse Swing</button></li>
 
             <p>Width [<span id="doorWindowWidthScale"></span>] : <span id="doorWindowWidthVal"></p>
-            <input type="range" id="doorWindowWidth" step="1" class="range" />
+            <p><input type="range" id="doorWindowWidth" step="1" class="range" /></p>
+            <input type="text" id="doorWindowWidthText" placeholder="Enter width"/>
             <br />
             <li><button class="btn btn-danger fully objTrash"><i class="fa fa-2x fa-trash-o" aria-hidden="true"></i></button></li>
             <li><button class="btn btn-info" style="margin-top:100px" onclick="fonc_button('select_mode');$('#boxinfo').html('Mode sélection');$('#objTools').hide('100');$('#panel').show('200');binder.graph.remove();delete binder;rib();"><i
@@ -327,7 +328,7 @@
             <li><button class="btn btn-default fully " id="text_mode" data-toggle="tooltip" data-placement="right" title="Add text">TEXT</button></li>
             <br />
             <div id="door_list" class="list-unstyled sub" style="box-shadow:2px 2px 3px #ccc;display:none;background:#fff;border-radius: 0 5px 5px 0; padding:10px;position:absolute;left:200px;width:150px">
-                <button class="btn fully door" id="aperture">Aperture</button>
+                <button class="btn fully door" id="opening">Opening/Archway</button>
                 <button class="btn fully door" id="simple">Simple</button>
                 <button class="btn fully door" id="double">Double</button>
                 <button class="btn fully door" id="pocket">Pocket</button>
@@ -427,21 +428,20 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Welcome Home Rough Editor v0.93</h4>
+                    <h4 class="modal-title" id="myModalLabel">Floor Plan Editor</h4>
                 </div>
                 <div class="modal-body">
                     <div id="recover">
-                        <p>A plan exists into historic, would you like recover him ?</p>
-                        <button class="btn btn-default" onclick="initHistory('recovery');$('#myModal').modal('toggle')">OUI</button></p>
+                        <button class="btn btn-success" onclick="initHistory('recovery');$('#myModal').modal('toggle')">Retrieve previous project</button></p>
                         <hr />
-                        <p>Or are you prefer start a new plan ?</p>
+                        <p>Start new project</p>
                     </div>
                     <div class="row">
-                        <div class="col-md-3 col-xs-3 boxMouseOver" style="min-height:140px;margin:15px;background:url('newPlanEmpty.jpg')"><img src="newPlanEmpty.jpg" class="img-responsive" onclick="initHistory();$('#myModal').modal('toggle')" />
+                        <div class="col-md-3 col-xs-3 boxMouseOver" title="Blank" style="min-height:140px;margin:15px;background:url('newPlanEmpty.jpg')"><img src="newPlanEmpty.jpg" class="img-responsive" onclick="initHistory();$('#myModal').modal('toggle')" />
                         </div>
-                        <div class="col-md-3 col-xs-3 boxMouseOver" style="min-height:140px;margin:15px;background:url('newPlanEmpty.jpg')"><img src="newPlanSquare.jpg" class="img-responsive" style="margin-top:10px"
+                        <div class="col-md-3 col-xs-3 boxMouseOver" title="Rectangular" style="min-height:140px;margin:15px;background:url('newPlanEmpty.jpg')"><img src="newPlanSquare.jpg" class="img-responsive" style="margin-top:10px"
                                 onclick="initHistory('newSquare');$('#myModal').modal('toggle')" /></div>
-                        <div class="col-md-3 col-xs-3 boxMouseOver" style="min-height:140px;margin:15px;background:url('newPlanEmpty.jpg')"><img src="newPlanL.jpg" class="img-responsive" style="margin-top:20px"
+                        <div class="col-md-3 col-xs-3 boxMouseOver" title="L-Shaped" style="min-height:140px;margin:15px;background:url('newPlanEmpty.jpg')"><img src="newPlanL.jpg" class="img-responsive" style="margin-top:20px"
                                 onclick="initHistory('newL');$('#myModal').modal('toggle')" /></div>
                     </div>
                 </div>

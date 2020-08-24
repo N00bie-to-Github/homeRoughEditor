@@ -333,13 +333,15 @@ var editor = {
         var wall;
         for (var k in newWalls) {
             wall = new editor.wall(initCoords, newWalls[k].coords, "normal", initThick);
-            WALLS.push(wall);
+            // WALLS.push(wall);
+            addWall(wall);
             wall.child = WALLS[WALLS.length];
             initCoords = newWalls[k].coords;
         }
         // LAST WALL ->
         wall = new editor.wall(initCoords, wallToSplit.end, "normal", initThick);
-        WALLS.push(wall);
+        // WALLS.push(wall);
+        addWall(wall);
         editor.architect(WALLS);
         mode = "select_mode";
         $('#panel').show(200);

@@ -29,5 +29,10 @@ var Settings = {
         ADD_WINDOW_TEXT: 'Add a window',
         ADD_STAIRS_TEXT: 'Add stairs',
         ADD_OBJECT_TEXT: 'Add an object',
+        ROOM_CONFIG_TEXT: 'Room configuration'
     }
-}
+};
+
+// TODO:
+// Add rotation of objects
+// Add tub, sink, shower, etc

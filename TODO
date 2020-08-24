@@ -1,0 +1,2 @@
+enable deletion of objects from list. Currently there's a bug that if the wall is deleted first, the object is orphaned
+enable editing of object properties

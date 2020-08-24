@@ -3,7 +3,7 @@ WALLS = [];
 OBJDATA = [];
 ROOM = [];
 HISTORY = [];
-wallSize = 20;
+wallSize = Settings.wall.width;
 partitionSize = 8;
 var drag = 'off';
 var action = 0;
@@ -750,8 +750,13 @@ function load(index = HISTORY.index, boot = false) {
         $('#boxcarpentry').append(OBJDATA[OBJDATA.length - 1].graph);
         obj.update();
     }
+
+    // Load the walls from history
     WALLS = historyTemp.wallData;
+
     for (var k in WALLS) {
+        // Assign an id to each wall if it doesn't have one
+        if(!WALLS[k].id) WALLS[k].id = generateUUID();
         if (WALLS[k].child != null) WALLS[k].child = WALLS[WALLS[k].child];
         if (WALLS[k].parent != null) WALLS[k].parent = WALLS[WALLS[k].parent];
     }
@@ -2045,11 +2050,11 @@ function rib(shift = 5) {
 }
 
 function cursor(tool) {
-    if (tool == 'grab') tool = "url('https://wiki.openmrs.org/s/en_GB/7502/b9217199c27dd617c8d51f6186067d7767c5001b/_/images/icons/emoticons/add.png') 8 8, auto";
-    if (tool == 'scissor') tool = "url('https://maxcdn.icons8.com/windows10/PNG/64/Hands/hand_scissors-64.png'), auto";
-    if (tool == 'trash') tool = "url('https://cdn4.iconfinder.com/data/icons/common-toolbar/36/Cancel-32.png'), auto";
-    if (tool == 'validation') tool = "url('https://images.fatguymedia.com/wp-content/uploads/2015/09/check.png'), auto";
-    $('#lin').css('cursor', tool);
+    // if (tool == 'grab') tool = "url('https://wiki.openmrs.org/s/en_GB/7502/b9217199c27dd617c8d51f6186067d7767c5001b/_/images/icons/emoticons/add.png') 8 8, auto";
+    // if (tool == 'scissor') tool = "url('https://maxcdn.icons8.com/windows10/PNG/64/Hands/hand_scissors-64.png'), auto";
+    // if (tool == 'trash') tool = "url('https://cdn4.iconfinder.com/data/icons/common-toolbar/36/Cancel-32.png'), auto";
+    // if (tool == 'validation') tool = "url('https://images.fatguymedia.com/wp-content/uploads/2015/09/check.png'), auto";
+    // $('#lin').css('cursor', tool);
 }
 
 function fullscreen() {
@@ -2057,11 +2062,14 @@ function fullscreen() {
     var i = document.body;
     if (i.requestFullscreen) {
         i.requestFullscreen();
-    } else if (i.webkitRequestFullscreen) {
+    }
+    else if (i.webkitRequestFullscreen) {
         i.webkitRequestFullscreen();
-    } else if (i.mozRequestFullScreen) {
+    }
+    else if (i.mozRequestFullScreen) {
         i.mozRequestFullScreen();
-    } else if (i.msRequestFullscreen) {
+    }
+    else if (i.msRequestFullscreen) {
         i.msRequestFullscreen();
     }
 }
@@ -2138,9 +2146,10 @@ $('#distance_mode').click(function() {
     fonc_button('distance_mode');
 });
 
+// crumb: select room
 $('#room_mode').click(function() {
     $('#lin').css('cursor', 'pointer');
-    $('#boxinfo').html('Config. of rooms');
+    $('#boxinfo').html(Settings.language.ROOM_CONFIG_TEXT);
     fonc_button('room_mode');
 });
 
@@ -2330,7 +2339,7 @@ function carpentryCalc(classObj, typeObj, sizeObj, thickObj, dividerObj = 10) {
                 max: 200
             };
         }
-        if (typeObj == 'aperture') {
+        if (typeObj == 'opening') {
             construc.push({
                 'path': "M " + (-sizeObj / 2) + "," + (-thickObj / 2) + " L " + (-sizeObj / 2) + "," + thickObj / 2 + " L " + sizeObj / 2 + "," + thickObj / 2 + " L " + sizeObj / 2 + "," + (-thickObj / 2) + " Z",
                 'fill': "#ccc",
