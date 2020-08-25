@@ -1,5 +1,9 @@
+// Constants
+var IMPERIAL = 1;
+var METRIC = 2;
+
 var Settings = {
-    unitSystem: 'imperial',
+    unitSystem: IMPERIAL,
     imperial:  {
         decimalPlaces: 3,
         fraction: 16
@@ -29,9 +33,13 @@ var Settings = {
         ADD_WINDOW_TEXT: 'Add a window',
         ADD_STAIRS_TEXT: 'Add stairs',
         ADD_OBJECT_TEXT: 'Add an object',
-        ROOM_CONFIG_TEXT: 'Room configuration'
+        ROOM_CONFIG_TEXT: 'Room configuration',
+        ADD_WALL_TEXT: 'Add wall(s)',
+        ADD_PARTITION_TEXT: 'Add partition(s)'
     }
 };
+
+
 
 // TODO:
 // Add rotation of objects

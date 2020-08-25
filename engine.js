@@ -28,6 +28,12 @@ window.addEventListener('resize', function(event) {
     document.querySelector('#lin').setAttribute('viewBox', originX_viewbox + ' ' + originY_viewbox + ' ' + width_viewbox + ' ' + height_viewbox)
 });
 
+$(document).keyup(function(event) {
+    var which = event.which;
+    if(which === 27) {
+        
+    }
+});
 
 /**
  * addWall - marks the wall being added. Each walls is assigned a uuid when added
@@ -1677,15 +1683,21 @@ function _MOUSEUP(event) {
 
     if (mode == 'line_mode' || mode == 'partition_mode') {
         $('#linetemp').remove(); // DEL LINE HELP CONSTRUC 0 45 90
+
         intersectionOff();
 
+        // Nothing to do since we don't have an x nor y to calculate the distance
+        if(typeof x === 'undefined' && typeof y === 'undefined')
+            return;
+
         var sizeWall = qSVG.measure({
-            x: x,
+            x: event.clientX,
             y: y
         }, {
             x: pox,
             y: poy
         });
+
         sizeWall = sizeWall / meter;
         if ($('#line_construc').length && sizeWall > 0.3) {
             var sizeWall = wallSize;

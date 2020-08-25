@@ -33,7 +33,7 @@ function formatArea(area, prec, wrapper) {
         return area;
     }
 
-    if(Settings.unitSystem === 'imperial') {
+    if(Settings.unitSystem === IMPERIAL) {
         return wrap(round(area*10.76391, prec)) + " ft²";
     }
 
@@ -49,7 +49,7 @@ function roundInches(inch) {
 function formatSmallLength(value, includeUnit) {
     includeUnit = typeof includeUnit === 'undefined' ? true : includeUnit;
 
-    if(Settings.unitSystem === 'imperial') {
+    if(Settings.unitSystem === IMPERIAL) {
         return roundInches(0.393701 * value) + (includeUnit ? ' inch' : '');
     }
 
@@ -75,7 +75,7 @@ function footInch(length, prec) {
 }
 
 function formatLength(length) {
-    if(Settings.unitSystem === 'imperial') {
+    if(Settings.unitSystem === IMPERIAL) {
         // Convert to feet
         var converted = footInch(3.280839895 * length);
         return `${converted.feet}' ${converted.inch}"`

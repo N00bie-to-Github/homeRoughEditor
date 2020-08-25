@@ -556,6 +556,16 @@ html {
     font-size: 200px;
 }
 
+#scaleVal {
+    border-bottom: 3px solid #000;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    height: 14px;
+    color: #000;
+    width:152.4px;
+    line-height: 5px;
+    margin-top: 10px;
+}
 /* #boxinfo {
     display: none;
 } */

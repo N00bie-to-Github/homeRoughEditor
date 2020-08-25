@@ -2077,9 +2077,11 @@ function fullscreen() {
 function outFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
+    }
+    else if (document.mozCancelFullScreen) {
         document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
+    }
+    else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
     }
 }
@@ -2165,7 +2167,7 @@ $('#select_mode').click(function() {
 
 $('#line_mode').click(function() {
     $('#lin').css('cursor', 'crosshair');
-    $('#boxinfo').html('Création de mur(s)');
+    $('#boxinfo').html(Settings.language.ADD_WALL_TEXT);
     multi = 0;
     action = 0;
     // snap = calcul_snap(event, grid_snap);
@@ -2177,7 +2179,7 @@ $('#line_mode').click(function() {
 
 $('#partition_mode').click(function() {
     $('#lin').css('cursor', 'crosshair');
-    $('#boxinfo').html('Création de cloison(s)');
+    $('#boxinfo').html(Settings.language.ADD_PARTITION_TEXT);
     multi = 0;
     fonc_button('partition_mode');
 });
