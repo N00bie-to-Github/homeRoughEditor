@@ -1,7 +1,7 @@
-$(function() {
+$(function () {
     // Set the scale text
     var scaleContainer = $('#scaleVal');
-    if(Settings.unitSystem === IMPERIAL) {
+    if (Settings.unitSystem === IMPERIAL) {
         scaleContainer.html('5 ft');
     }
     else {

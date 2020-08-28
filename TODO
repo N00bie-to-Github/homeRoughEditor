@@ -1,2 +1,12 @@
 enable deletion of objects from list. Currently there's a bug that if the wall is deleted first, the object is orphaned
 enable editing of object properties
+
+add ability to delete measurements
+
+add listener for delete button
+
+the zero line separator currently looks like a crop button. Fix
+
+
+// Common commands
+py -m http.server

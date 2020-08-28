@@ -1,6 +1,6 @@
 var editor = {
 
-    wall: function(start, end, type, thick) {
+    wall: function (start, end, type, thick) {
         this.thick = thick;
         this.start = start;
         this.end = end;
@@ -14,7 +14,7 @@ var editor = {
     },
 
     // RETURN OBJECTS ARRAY INDEX OF WALLS [WALL1, WALL2, n...] WALLS WITH THIS NODE, EXCEPT PARAM = OBJECT WALL
-    getWallNode: function(coords, except = false) {
+    getWallNode: function (coords, except = false) {
         var nodes = [];
         for (var k in WALLS) {
             if (!isObjectsEquals(WALLS[k], except)) {
@@ -32,11 +32,13 @@ var editor = {
                 }
             }
         }
-        if (nodes.length == 0) return false;
-        else return nodes;
+        if (nodes.length == 0)
+            return false;
+        else
+            return nodes;
     },
 
-    wallsComputing: function(WALLS, action = false) {
+    wallsComputing: function (WALLS, action = false) {
         // IF ACTION == MOVE -> equation2 exist !!!!!
         $('#boxwall').empty();
         $('#boxArea').empty();
@@ -68,7 +70,8 @@ var editor = {
                     var previousWallStart = previousWall.start;
                     var previousWallEnd = previousWall.end;
                 }
-            } else {
+            }
+            else {
                 var S = editor.getWallNode(wall.start, wall);
                 // if (wallInhibation && isObjectsEquals(wall, wallInhibation)) S = false;
                 for (var k in S) {
@@ -99,12 +102,14 @@ var editor = {
                     var nextWall = wall.child;
                     var nextWallStart = nextWall.end;
                     var nextWallEnd = nextWall.start;
-                } else {
+                }
+                else {
                     var nextWall = wall.child;
                     var nextWallStart = nextWall.start;
                     var nextWallEnd = nextWall.end;
                 }
-            } else {
+            }
+            else {
                 var E = editor.getWallNode(wall.end, wall);
                 // if (wallInhibation && isObjectsEquals(wall, wallInhibation)) E = false;
                 for (var k in E) {
@@ -151,7 +156,8 @@ var editor = {
                 var interDw = qSVG.intersectionOfEquations(eqWallDw, eqP, "object");
                 wall.coords = [interUp, interDw];
                 dWay = "M" + interUp.x + "," + interUp.y + " L" + interDw.x + "," + interDw.y + " ";
-            } else {
+            }
+            else {
                 var eqP = qSVG.perpendicularEquation(eqWallUp, wall.start.x, wall.start.y);
                 // var previousWall = wall.parent;
                 //   var previousWallStart = previousWall.start;
@@ -200,7 +206,8 @@ var editor = {
                 var interDw = qSVG.intersectionOfEquations(eqWallDw, eqP, "object");
                 wall.coords.push(interDw, interUp);
                 dWay = dWay + "L" + interDw.x + "," + interDw.y + " L" + interUp.x + "," + interUp.y + " Z";
-            } else {
+            }
+            else {
                 var eqP = qSVG.perpendicularEquation(eqWallUp, wall.end.x, wall.end.y);
                 // var nextWall = wall.child;
                 //   var nextWallStart = nextWall.start;
@@ -245,10 +252,10 @@ var editor = {
 
             wall.graph = editor.makeWall(dWay);
             $('#boxwall').append(wall.graph);
-        }
+    }
     },
 
-    makeWall: function(way) {
+    makeWall: function (way) {
         var wallScreen = qSVG.create('none', 'path', {
             d: way,
             stroke: "none",
@@ -262,8 +269,9 @@ var editor = {
         return wallScreen;
     },
 
-    invisibleWall: function(wallToInvisble = false) {
-        if (!wallToInvisble) wallToInvisble = binder.wall;
+    invisibleWall: function (wallToInvisble = false) {
+        if (!wallToInvisble)
+            wallToInvisble = binder.wall;
         var objWall = editor.objFromWall(wallBind);
         if (objWall.length == 0) {
             wallToInvisble.type = "separate";
@@ -274,14 +282,16 @@ var editor = {
             $('#panel').show(200);
             save();
             return true;
-        } else {
+        }
+        else {
             $('#boxinfo').html('Les murs contenant des portes ou des fenêtres ne peuvent être une séparation !');
             return false;
-        }
+    }
     },
 
-    visibleWall: function(wallToInvisble = false) {
-        if (!wallToInvisble) wallToInvisble = binder.wall;
+    visibleWall: function (wallToInvisble = false) {
+        if (!wallToInvisble)
+            wallToInvisble = binder.wall;
         wallToInvisble.type = "normal";
         wallToInvisble.thick = wallToInvisble.backUp;
         wallToInvisble.backUp = false;
@@ -292,7 +302,7 @@ var editor = {
         return true;
     },
 
-    architect: function(WALLS) {
+    architect: function (WALLS) {
         editor.wallsComputing(WALLS);
         Rooms = qSVG.polygonize(WALLS);
         $('#boxRoom').empty();
@@ -301,8 +311,9 @@ var editor = {
         return true;
     },
 
-    splitWall: function(wallToSplit = false) {
-        if (!wallToSplit) wallToSplit = binder.wall;
+    splitWall: function (wallToSplit = false) {
+        if (!wallToSplit)
+            wallToSplit = binder.wall;
         var eqWall = editor.createEquationFromWall(wallToSplit);
         var wallToSplitLength = qSVG.gap(wallToSplit.start, wallToSplit.end);
         var newWalls = [];
@@ -311,20 +322,22 @@ var editor = {
             var inter = qSVG.intersectionOfEquations(eqWall, eq, 'obj');
             if (qSVG.btwn(inter.x, binder.wall.start.x, binder.wall.end.x, 'round') && qSVG.btwn(inter.y, binder.wall.start.y, binder.wall.end.y, 'round') && qSVG.btwn(inter.x, WALLS[k].start.x, WALLS[k].end.x, 'round') && qSVG.btwn(inter.y, WALLS[k].start.y, WALLS[k].end.y, 'round')) {
                 var distance = qSVG.gap(wallToSplit.start, inter);
-                if (distance > 5 && distance < wallToSplitLength) newWalls.push({
-                    distance: distance,
-                    coords: inter
-                });
+                if (distance > 5 && distance < wallToSplitLength)
+                    newWalls.push({
+                        distance: distance,
+                        coords: inter
+                    });
             }
         }
-        newWalls.sort(function(a, b) {
+        newWalls.sort(function (a, b) {
             return (a.distance - b.distance).toFixed(2);
         });
         var initCoords = wallToSplit.start;
         var initThick = wallToSplit.thick;
         // CLEAR THE WALL BEFORE PIECES RE-BUILDER
         for (var k in WALLS) {
-            if (isObjectsEquals(WALLS[k].child, wallToSplit)) WALLS[k].child = null;
+            if (isObjectsEquals(WALLS[k].child, wallToSplit))
+                WALLS[k].child = null;
             if (isObjectsEquals(WALLS[k].parent, wallToSplit)) {
                 WALLS[k].parent = null;
             }
@@ -349,7 +362,7 @@ var editor = {
         return true;
     },
 
-    nearWallNode: function(snap, range = Infinity, except = ['']) {
+    nearWallNode: function (snap, range = Infinity, except = ['']) {
         var best;
         var bestWall;
         var scan;
@@ -380,13 +393,14 @@ var editor = {
                 y: best.y,
                 bestWall: bestWall
             });
-        } else {
-            return false;
         }
+        else {
+            return false;
+    }
     },
 
     // USING WALLS SUPER WALL OBJECTS ARRAY
-    rayCastingWall: function(snap) {
+    rayCastingWall: function (snap) {
         var wallList = [];
         for (var i = 0; i < WALLS.length; i++) {
             var polygon = [];
@@ -400,19 +414,24 @@ var editor = {
                 wallList.push(WALLS[i]); // Return EDGES Index
             }
         }
-        if (wallList.length == 0) return false;
+        if (wallList.length == 0)
+            return false;
         else {
-            if (wallList.length == 1) return wallList[0];
-            else return wallList;
+            if (wallList.length == 1)
+                return wallList[0];
+            else
+                return wallList;
         }
     },
 
-    stickOnWall: function(snap) {
-        if (WALLS.length == 0) return false;
+    stickOnWall: function (snap) {
+        if (WALLS.length == 0)
+            return false;
         var wallDistance = Infinity;
         var wallSelected = {};
         var result;
-        if (WALLS.length == 0) return false;
+        if (WALLS.length == 0)
+            return false;
         for (var e = 0; e < WALLS.length; e++) {
             var eq1 = qSVG.createEquation(WALLS[e].coords[0].x, WALLS[e].coords[0].y, WALLS[e].coords[3].x, WALLS[e].coords[3].y);
             result1 = qSVG.nearPointOnEquation(eq1, snap);
@@ -465,16 +484,16 @@ var editor = {
         return wallSelected;
     },
 
-
     // RETURN OBJDATA INDEX LIST FROM AN WALL
-    objFromWall: function(wall, typeObj = false) {
+    objFromWall: function (wall, typeObj = false) {
         var objList = [];
         for (var scan = 0; scan < OBJDATA.length; scan++) {
             var search;
             if (OBJDATA[scan].family == 'inWall') {
                 var eq = qSVG.createEquation(wall.start.x, wall.start.y, wall.end.x, wall.end.y);
                 search = qSVG.nearPointOnEquation(eq, OBJDATA[scan]);
-                if (search.distance < 0.01 && qSVG.btwn(OBJDATA[scan].x, wall.start.x, wall.end.x) && qSVG.btwn(OBJDATA[scan].y, wall.start.y, wall.end.y)) objList.push(OBJDATA[scan]);
+                if (search.distance < 0.01 && qSVG.btwn(OBJDATA[scan].x, wall.start.x, wall.end.x) && qSVG.btwn(OBJDATA[scan].y, wall.start.y, wall.end.y))
+                    objList.push(OBJDATA[scan]);
                 // WARNING 0.01 TO NO COUNT OBJECT ON LIMITS OF THE EDGE !!!!!!!!!!!! UGLY CODE( MOUSE PRECISION)
                 // TRY WITH ANGLE MAYBE ???
             }
@@ -482,12 +501,12 @@ var editor = {
         return objList;
     },
 
-    createEquationFromWall: function(wall) {
+    createEquationFromWall: function (wall) {
         return qSVG.createEquation(wall.start.x, wall.start.y, wall.end.x, wall.end.y);
     },
 
     // WALLS SUPER ARRAY
-    rayCastingWalls: function(snap) {
+    rayCastingWalls: function (snap) {
         var wallList = [];
         for (var i = 0; i < WALLS.length; i++) {
             var polygon = [];
@@ -501,15 +520,19 @@ var editor = {
                 wallList.push(WALLS[i]); // Return EDGES Index
             }
         }
-        if (wallList.length == 0) return false;
+        if (wallList.length == 0)
+            return false;
         else {
-            if (wallList.length == 1) return wallList[0];
-            else return wallList;
+            if (wallList.length == 1)
+                return wallList[0];
+            else
+                return wallList;
         }
     },
 
-    inWallRib2: function(wall, option = false) {
-        if (!option) $('#boxRib').empty();
+    inWallRib2: function (wall, option = false) {
+        if (!option)
+            $('#boxRib').empty();
         ribMaster = [];
         var emptyArray = [];
         ribMaster.push(emptyArray);
@@ -593,10 +616,10 @@ var editor = {
             coords: wall.coords[2],
             distance: distance
         });
-        ribMaster[0].sort(function(a, b) {
+        ribMaster[0].sort(function (a, b) {
             return (a.distance - b.distance).toFixed(2);
         });
-        ribMaster[1].sort(function(a, b) {
+        ribMaster[1].sort(function (a, b) {
             return (a.distance - b.distance).toFixed(2);
         });
         for (var t in ribMaster) {
@@ -613,7 +636,9 @@ var editor = {
                         angleText -= 180;
                         if (ribMaster[t][n - 1].side == 'down') {
                             shift = -5;
-                        } else shift = -shift + 10;
+                        }
+                        else
+                            shift = -shift + 10;
                     }
 
 
@@ -630,7 +655,9 @@ var editor = {
                     if (sizeText[n].textContent < 1) {
                         sizeText[n].setAttributeNS(null, 'font-size', '0.8em');
                         sizeText[n].textContent = sizeText[n].textContent.substring(1, sizeText[n].textContent.length);
-                    } else sizeText[n].setAttributeNS(null, 'font-size', '1em');
+                    }
+                    else
+                        sizeText[n].setAttributeNS(null, 'font-size', '1em');
                     sizeText[n].setAttributeNS(null, 'stroke-width', '0.4px');
                     sizeText[n].setAttributeNS(null, 'fill', '#666666');
                     sizeText[n].setAttribute("transform", "rotate(" + angleText + " " + startText.x + "," + (startText.y) + ")");
@@ -638,11 +665,11 @@ var editor = {
                     $('#boxRib').append(sizeText[n]);
                 }
             }
-        }
+    }
     },
 
     // value can be "text label", "step number in stair", etc...
-    obj2D: function(family, classe, type, pos, angle, angleSign, size, hinge = 'normal', thick, value) {
+    obj2D: function (family, classe, type, pos, angle, angleSign, size, hinge = 'normal', thick, value) {
         this.family = family // inWall, stick, collision, free
         this.class = classe; // door, window, energy, stair, measure, text ?
         this.type = type; // simple, double, simpleSlide, aperture, doubleSlide, fixed, switch, lamp....
@@ -701,39 +728,43 @@ var editor = {
         };
         this.bbox = bbox;
         this.realBbox = [{
-            x: -this.size / 2,
-            y: -this.thick / 2
-        }, {
-            x: this.size / 2,
-            y: -this.thick / 2
-        }, {
-            x: this.size / 2,
-            y: this.thick / 2
-        }, {
-            x: -this.size / 2,
-            y: this.thick / 2
-        }];
-        if (family == "byObject") this.family = cc.family;
+                x: -this.size / 2,
+                y: -this.thick / 2
+            }, {
+                x: this.size / 2,
+                y: -this.thick / 2
+            }, {
+                x: this.size / 2,
+                y: this.thick / 2
+            }, {
+                x: -this.size / 2,
+                y: this.thick / 2
+            }];
+        if (family == "byObject")
+            this.family = cc.family;
         this.params = cc.params; // (bindBox, move, resize, rotate)
         cc.params.width ? this.size = cc.params.width : this.size = size;
         cc.params.height ? this.thick = cc.params.height : this.thick = thick;
 
 
-        this.update = function() {
+        this.update = function () {
             this.width = (this.size / meter).toFixed(2);
             this.height = (this.thick / meter).toFixed(2);
             cc = carpentryCalc(this.class, this.type, this.size, this.thick, this.value);
             for (var tt = 0; tt < cc.length; tt++) {
                 if (cc[tt].path) {
                     this.graph.find('path')[tt].setAttribute("d", cc[tt].path);
-                } else {
+                }
+                else {
                     // this.graph.find('text').context.textContent = cc[tt].text;
                 }
             }
             var hingeStatus = this.hinge; // normal - reverse
             var hingeUpdate;
-            if (hingeStatus == 'normal') hingeUpdate = 1;
-            else hingeUpdate = -1;
+            if (hingeStatus == 'normal')
+                hingeUpdate = 1;
+            else
+                hingeUpdate = -1;
             this.graph.attr({
                 "transform": "translate(" + (this.x) + "," + (this.y) + ") rotate(" + this.angle + ",0,0) scale(" + hingeUpdate + ", 1)"
             });
@@ -748,49 +779,49 @@ var editor = {
 
             if (this.class == "text" && this.angle == 0) {
                 this.realBbox = [{
-                    x: this.bbox.x,
-                    y: this.bbox.y
-                }, {
-                    x: this.bbox.x + this.bbox.width,
-                    y: this.bbox.y
-                }, {
-                    x: this.bbox.x + this.bbox.width,
-                    y: this.bbox.y + this.bbox.height
-                }, {
-                    x: this.bbox.x,
-                    y: this.bbox.y + this.bbox.height
-                }];
+                        x: this.bbox.x,
+                        y: this.bbox.y
+                    }, {
+                        x: this.bbox.x + this.bbox.width,
+                        y: this.bbox.y
+                    }, {
+                        x: this.bbox.x + this.bbox.width,
+                        y: this.bbox.y + this.bbox.height
+                    }, {
+                        x: this.bbox.x,
+                        y: this.bbox.y + this.bbox.height
+                    }];
                 this.size = this.bbox.width;
                 this.thick = this.bbox.height;
             }
 
             var angleRadian = -(this.angle) * (Math.PI / 180);
             this.realBbox = [{
-                x: -this.size / 2,
-                y: -this.thick / 2
-            }, {
-                x: this.size / 2,
-                y: -this.thick / 2
-            }, {
-                x: this.size / 2,
-                y: this.thick / 2
-            }, {
-                x: -this.size / 2,
-                y: this.thick / 2
-            }];
+                    x: -this.size / 2,
+                    y: -this.thick / 2
+                }, {
+                    x: this.size / 2,
+                    y: -this.thick / 2
+                }, {
+                    x: this.size / 2,
+                    y: this.thick / 2
+                }, {
+                    x: -this.size / 2,
+                    y: this.thick / 2
+                }];
             var newRealBbox = [{
-                x: 0,
-                y: 0
-            }, {
-                x: 0,
-                y: 0
-            }, {
-                x: 0,
-                y: 0
-            }, {
-                x: 0,
-                y: 0
-            }];
+                    x: 0,
+                    y: 0
+                }, {
+                    x: 0,
+                    y: 0
+                }, {
+                    x: 0,
+                    y: 0
+                }, {
+                    x: 0,
+                    y: 0
+                }];
             newRealBbox[0].x = (this.realBbox[0].y * Math.sin(angleRadian) + this.realBbox[0].x * Math.cos(angleRadian)) + this.x;
             newRealBbox[1].x = (this.realBbox[1].y * Math.sin(angleRadian) + this.realBbox[1].x * Math.cos(angleRadian)) + this.x;
             newRealBbox[2].x = (this.realBbox[2].y * Math.sin(angleRadian) + this.realBbox[2].x * Math.cos(angleRadian)) + this.x;
@@ -801,13 +832,14 @@ var editor = {
             newRealBbox[3].y = (this.realBbox[3].y * Math.cos(angleRadian) - this.realBbox[3].x * Math.sin(angleRadian)) + this.y;
             this.realBbox = newRealBbox;
             return true;
-        }
+    }
     },
 
-    roomMaker: function(Rooms) {
+    roomMaker: function (Rooms) {
         globalArea = 0;
         var oldVertexNumber = [];
-        if (Rooms.polygons.length == 0) ROOM = [];
+        if (Rooms.polygons.length == 0)
+            ROOM = [];
         for (var pp = 0; pp < Rooms.polygons.length; pp++) {
             var foundRoom = false;
             var roomId;
@@ -882,12 +914,15 @@ var editor = {
                 if (countRoom == 0) {
                     found = true;
                     break;
-                } else found = false;
+                }
+                else
+                    found = false;
             }
-            if (!found) toSplice.push(rr);
+            if (!found)
+                toSplice.push(rr);
         }
 
-        toSplice.sort(function(a, b) {
+        toSplice.sort(function (a, b) {
             return b - a;
         });
         for (var ss = 0; ss < toSplice.length; ss++) {
@@ -898,7 +933,8 @@ var editor = {
         $('#boxArea').empty();
         for (var rr = 0; rr < ROOM.length; rr++) {
 
-            if (ROOM[rr].action == 'add') globalArea = globalArea + ROOM[rr].area;
+            if (ROOM[rr].action == 'add')
+                globalArea = globalArea + ROOM[rr].area;
 
             var pathSurface = ROOM[rr].coords;
             var pathCreate = "M" + pathSurface[0].x + "," + pathSurface[0].y;
@@ -937,11 +973,13 @@ var editor = {
                 var styled = {
                     color: '#343938'
                 };
-                if (ROOM[rr].color == 'gradientBlack' || ROOM[rr].color == 'gradientBlue') styled.color = 'white';
+                if (ROOM[rr].color == 'gradientBlack' || ROOM[rr].color == 'gradientBlue')
+                    styled.color = 'white';
                 qSVG.textOnDiv(ROOM[rr].name, centroid, styled, 'boxArea');
             }
 
-            if (ROOM[rr].name != '') centroid.y = centroid.y + 20;
+            if (ROOM[rr].name != '')
+                centroid.y = centroid.y + 20;
             // var area = ((ROOM[rr].area) / (meter * meter)).toFixed(2) + ' m²';
             // The floor plan area
             var area = formatArea(((ROOM[rr].area) / (meter * meter)))
@@ -952,11 +990,13 @@ var editor = {
             };
             if (ROOM[rr].surface != '') {
                 styled.fontWeight = 'bold';
-                area =  formatArea(ROOM[rr].surface);
+                area = formatArea(ROOM[rr].surface);
                 console.log('Found #1')
             }
-            if (ROOM[rr].color == 'gradientBlack' || ROOM[rr].color == 'gradientBlue') styled.color = 'white';
-            if (ROOM[rr].showSurface) qSVG.textOnDiv(area, centroid, styled, 'boxArea');
+            if (ROOM[rr].color == 'gradientBlack' || ROOM[rr].color == 'gradientBlue')
+                styled.color = 'white';
+            if (ROOM[rr].showSurface)
+                qSVG.textOnDiv(area, centroid, styled, 'boxArea');
         }
         if (globalArea <= 0) {
             globalArea = 0;
@@ -968,9 +1008,9 @@ var editor = {
         }
     },
 
-    rayCastingRoom: function(point) {
+    rayCastingRoom: function (point) {
         var x = point.x,
-            y = point.y;
+                y = point.y;
         var roomGroup = [];
         for (var polygon = 0; polygon < ROOM.length; polygon++) {
             var inside = qSVG.rayCasting(point, ROOM[polygon].coords);
@@ -989,12 +1029,13 @@ var editor = {
                 }
             }
             return roomTarget;
-        } else {
+        }
+        else {
             return false;
         }
     },
 
-    nearVertice: function(snap, range = 10000) {
+    nearVertice: function (snap, range = 10000) {
         var bestDistance = Infinity;
         var bestVertice;
         for (var i = 0; i < WALLS.length; i++) {
@@ -1025,15 +1066,18 @@ var editor = {
                 };
             }
         }
-        if (bestDistance < range * range) return bestVertice;
-        else return false;
+        if (bestDistance < range * range)
+            return bestVertice;
+        else
+            return false;
     },
 
-    nearWall: function(snap, range = Infinity) {
+    nearWall: function (snap, range = Infinity) {
         var wallDistance = Infinity;
         var wallSelected = {};
         var result;
-        if (WALLS.length == 0) return false;
+        if (WALLS.length == 0)
+            return false;
         for (var e = 0; e < WALLS.length; e++) {
             var eq = qSVG.createEquation(WALLS[e].start.x, WALLS[e].start.y, WALLS[e].end.x, WALLS[e].end.y);
             result = qSVG.nearPointOnEquation(eq, snap);
@@ -1057,26 +1101,36 @@ var editor = {
                 distance: vv.distance
             };
         }
-        if (wallDistance <= range) return wallSelected;
-        else return false;
+        if (wallDistance <= range)
+            return wallSelected;
+        else
+            return false;
     },
 
-    showScaleBox: function() {
+    showScaleBox: function () {
         if (ROOM.length > 0) {
             var minX, minY, maxX, maxY;
             for (var i = 0; i < WALLS.length; i++) {
                 var px = WALLS[i].start.x;
                 var py = WALLS[i].start.y;
-                if (!i || px < minX) minX = px;
-                if (!i || py < minY) minY = py;
-                if (!i || px > maxX) maxX = px;
-                if (!i || py > maxY) maxY = py;
+                if (!i || px < minX)
+                    minX = px;
+                if (!i || py < minY)
+                    minY = py;
+                if (!i || px > maxX)
+                    maxX = px;
+                if (!i || py > maxY)
+                    maxY = py;
                 var px = WALLS[i].end.x;
                 var py = WALLS[i].end.y;
-                if (!i || px < minX) minX = px;
-                if (!i || py < minY) minY = py;
-                if (!i || px > maxX) maxX = px;
-                if (!i || py > maxY) maxY = py;
+                if (!i || px < minX)
+                    minX = px;
+                if (!i || py < minY)
+                    minY = py;
+                if (!i || px > maxX)
+                    maxX = px;
+                if (!i || py > maxY)
+                    maxY = py;
             }
             var width = maxX - minX;
             var height = maxY - minY;

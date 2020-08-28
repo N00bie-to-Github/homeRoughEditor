@@ -43,259 +43,261 @@ var factor = 1;
 
 function initHistory(boot = false) {
     HISTORY.index = 0;
-    if (!boot && localStorage.getItem('history')) localStorage.removeItem('history');
+    if (!boot && localStorage.getItem('history'))
+        localStorage.removeItem('history');
     if (localStorage.getItem('history') && boot == "recovery") {
         var historyTemp = JSON.parse(localStorage.getItem('history'));
         load(historyTemp.length - 1, "boot");
         save("boot");
     }
     if (boot == "newSquare") {
-        if (localStorage.getItem('history')) localStorage.removeItem('history');
+        if (localStorage.getItem('history'))
+            localStorage.removeItem('history');
         HISTORY.push({
             "objData": [],
             "wallData": [{
-                "thick": Settings.wall.width,
-                "start": {
-                    "x": 540,
-                    "y": 194
-                },
-                "end": {
-                    "x": 540,
-                    "y": 734
-                },
-                "type": "normal",
-                "parent": 3,
-                "child": 1,
-                "angle": 1.5707963267948966,
-                "equations": {
-                    "up": {
-                        "A": "v",
-                        "B": 550
+                    "thick": Settings.wall.width,
+                    "start": {
+                        "x": 540,
+                        "y": 194
                     },
-                    "down": {
-                        "A": "v",
-                        "B": 530
+                    "end": {
+                        "x": 540,
+                        "y": 734
                     },
-                    "base": {
-                        "A": "v",
-                        "B": 540
+                    "type": "normal",
+                    "parent": 3,
+                    "child": 1,
+                    "angle": 1.5707963267948966,
+                    "equations": {
+                        "up": {
+                            "A": "v",
+                            "B": 550
+                        },
+                        "down": {
+                            "A": "v",
+                            "B": 530
+                        },
+                        "base": {
+                            "A": "v",
+                            "B": 540
+                        }
+                    },
+                    "coords": [{
+                            "x": 550,
+                            "y": 204
+                        }, {
+                            "x": 530,
+                            "y": 184
+                        }, {
+                            "x": 530,
+                            "y": 744
+                        }, {
+                            "x": 550,
+                            "y": 724
+                        }],
+                    "graph": {
+                        "0": {},
+                        "context": {},
+                        "length": 1
                     }
-                },
-                "coords": [{
-                    "x": 550,
-                    "y": 204
                 }, {
-                    "x": 530,
-                    "y": 184
-                }, {
-                    "x": 530,
-                    "y": 744
-                }, {
-                    "x": 550,
-                    "y": 724
-                }],
-                "graph": {
-                    "0": {},
-                    "context": {},
-                    "length": 1
-                }
-            }, {
-                "thick": Settings.wall.width,
-                "start": {
-                    "x": 540,
-                    "y": 734
-                },
-                "end": {
-                    "x": 1080,
-                    "y": 734
-                },
-                "type": "normal",
-                "parent": 0,
-                "child": 2,
-                "angle": 0,
-                "equations": {
-                    "up": {
-                        "A": "h",
-                        "B": 724
+                    "thick": Settings.wall.width,
+                    "start": {
+                        "x": 540,
+                        "y": 734
                     },
-                    "down": {
-                        "A": "h",
-                        "B": 744
+                    "end": {
+                        "x": 1080,
+                        "y": 734
                     },
-                    "base": {
-                        "A": "h",
-                        "B": 734
+                    "type": "normal",
+                    "parent": 0,
+                    "child": 2,
+                    "angle": 0,
+                    "equations": {
+                        "up": {
+                            "A": "h",
+                            "B": 724
+                        },
+                        "down": {
+                            "A": "h",
+                            "B": 744
+                        },
+                        "base": {
+                            "A": "h",
+                            "B": 734
+                        }
+                    },
+                    "coords": [{
+                            "x": 550,
+                            "y": 724
+                        }, {
+                            "x": 530,
+                            "y": 744
+                        }, {
+                            "x": 1090,
+                            "y": 744
+                        }, {
+                            "x": 1070,
+                            "y": 724
+                        }],
+                    "graph": {
+                        "0": {},
+                        "context": {},
+                        "length": 1
                     }
-                },
-                "coords": [{
-                    "x": 550,
-                    "y": 724
                 }, {
-                    "x": 530,
-                    "y": 744
-                }, {
-                    "x": 1090,
-                    "y": 744
-                }, {
-                    "x": 1070,
-                    "y": 724
-                }],
-                "graph": {
-                    "0": {},
-                    "context": {},
-                    "length": 1
-                }
-            }, {
-                "thick": Settings.wall.width,
-                "start": {
-                    "x": 1080,
-                    "y": 734
-                },
-                "end": {
-                    "x": 1080,
-                    "y": 194
-                },
-                "type": "normal",
-                "parent": 1,
-                "child": 3,
-                "angle": -1.5707963267948966,
-                "equations": {
-                    "up": {
-                        "A": "v",
-                        "B": 1070
+                    "thick": Settings.wall.width,
+                    "start": {
+                        "x": 1080,
+                        "y": 734
                     },
-                    "down": {
-                        "A": "v",
-                        "B": 1090
+                    "end": {
+                        "x": 1080,
+                        "y": 194
                     },
-                    "base": {
-                        "A": "v",
-                        "B": 1080
+                    "type": "normal",
+                    "parent": 1,
+                    "child": 3,
+                    "angle": -1.5707963267948966,
+                    "equations": {
+                        "up": {
+                            "A": "v",
+                            "B": 1070
+                        },
+                        "down": {
+                            "A": "v",
+                            "B": 1090
+                        },
+                        "base": {
+                            "A": "v",
+                            "B": 1080
+                        }
+                    },
+                    "coords": [{
+                            "x": 1070,
+                            "y": 724
+                        }, {
+                            "x": 1090,
+                            "y": 744
+                        }, {
+                            "x": 1090,
+                            "y": 184
+                        }, {
+                            "x": 1070,
+                            "y": 204
+                        }],
+                    "graph": {
+                        "0": {},
+                        "context": {},
+                        "length": 1
                     }
-                },
-                "coords": [{
-                    "x": 1070,
-                    "y": 724
                 }, {
-                    "x": 1090,
-                    "y": 744
-                }, {
-                    "x": 1090,
-                    "y": 184
-                }, {
-                    "x": 1070,
-                    "y": 204
-                }],
-                "graph": {
-                    "0": {},
-                    "context": {},
-                    "length": 1
-                }
-            }, {
-                "thick": Settings.wall.width,
-                "start": {
-                    "x": 1080,
-                    "y": 194
-                },
-                "end": {
-                    "x": 540,
-                    "y": 194
-                },
-                "type": "normal",
-                "parent": 2,
-                "child": 0,
-                "angle": 3.141592653589793,
-                "equations": {
-                    "up": {
-                        "A": "h",
-                        "B": 204
+                    "thick": Settings.wall.width,
+                    "start": {
+                        "x": 1080,
+                        "y": 194
                     },
-                    "down": {
-                        "A": "h",
-                        "B": 184
+                    "end": {
+                        "x": 540,
+                        "y": 194
                     },
-                    "base": {
-                        "A": "h",
-                        "B": 194
+                    "type": "normal",
+                    "parent": 2,
+                    "child": 0,
+                    "angle": 3.141592653589793,
+                    "equations": {
+                        "up": {
+                            "A": "h",
+                            "B": 204
+                        },
+                        "down": {
+                            "A": "h",
+                            "B": 184
+                        },
+                        "base": {
+                            "A": "h",
+                            "B": 194
+                        }
+                    },
+                    "coords": [{
+                            "x": 1070,
+                            "y": 204
+                        }, {
+                            "x": 1090,
+                            "y": 184
+                        }, {
+                            "x": 530,
+                            "y": 184
+                        }, {
+                            "x": 550,
+                            "y": 204
+                        }],
+                    "graph": {
+                        "0": {},
+                        "context": {},
+                        "length": 1
                     }
-                },
-                "coords": [{
-                    "x": 1070,
-                    "y": 204
-                }, {
-                    "x": 1090,
-                    "y": 184
-                }, {
-                    "x": 530,
-                    "y": 184
-                }, {
-                    "x": 550,
-                    "y": 204
                 }],
-                "graph": {
-                    "0": {},
-                    "context": {},
-                    "length": 1
-                }
-            }],
             "roomData": [{
-                "coords": [{
-                    "x": 540,
-                    "y": 734
-                }, {
-                    "x": 1080,
-                    "y": 734
-                }, {
-                    "x": 1080,
-                    "y": 194
-                }, {
-                    "x": 540,
-                    "y": 194
-                }, {
-                    "x": 540,
-                    "y": 734
-                }],
-                "coordsOutside": [{
-                    "x": 1090,
-                    "y": 744
-                }, {
-                    "x": 1090,
-                    "y": 184
-                }, {
-                    "x": 530,
-                    "y": 184
-                }, {
-                    "x": 530,
-                    "y": 744
-                }, {
-                    "x": 1090,
-                    "y": 744
-                }],
-                "coordsInside": [{
-                    "x": 1070,
-                    "y": 724
-                }, {
-                    "x": 1070,
-                    "y": 204
-                }, {
-                    "x": 550,
-                    "y": 204
-                }, {
-                    "x": 550,
-                    "y": 724
-                }, {
-                    "x": 1070,
-                    "y": 724
-                }],
-                "inside": [],
-                "way": ["0", "2", "3", "1", "0"],
-                "area": 270400,
-                "surface": "",
-                "name": "",
-                "color": "gradientWhite",
-                "showSurface": true,
-                "action": "add"
-            }]
+                    "coords": [{
+                            "x": 540,
+                            "y": 734
+                        }, {
+                            "x": 1080,
+                            "y": 734
+                        }, {
+                            "x": 1080,
+                            "y": 194
+                        }, {
+                            "x": 540,
+                            "y": 194
+                        }, {
+                            "x": 540,
+                            "y": 734
+                        }],
+                    "coordsOutside": [{
+                            "x": 1090,
+                            "y": 744
+                        }, {
+                            "x": 1090,
+                            "y": 184
+                        }, {
+                            "x": 530,
+                            "y": 184
+                        }, {
+                            "x": 530,
+                            "y": 744
+                        }, {
+                            "x": 1090,
+                            "y": 744
+                        }],
+                    "coordsInside": [{
+                            "x": 1070,
+                            "y": 724
+                        }, {
+                            "x": 1070,
+                            "y": 204
+                        }, {
+                            "x": 550,
+                            "y": 204
+                        }, {
+                            "x": 550,
+                            "y": 724
+                        }, {
+                            "x": 1070,
+                            "y": 724
+                        }],
+                    "inside": [],
+                    "way": ["0", "2", "3", "1", "0"],
+                    "area": 270400,
+                    "surface": "",
+                    "name": "",
+                    "color": "gradientWhite",
+                    "showSurface": true,
+                    "action": "add"
+                }]
         });
         HISTORY[0] = JSON.stringify(HISTORY[0]);
         localStorage.setItem('history', JSON.stringify(HISTORY));
@@ -303,371 +305,372 @@ function initHistory(boot = false) {
         save();
     }
     if (boot == "newL") {
-        if (localStorage.getItem('history')) localStorage.removeItem('history');
+        if (localStorage.getItem('history'))
+            localStorage.removeItem('history');
         HISTORY.push({
             "objData": [],
             "wallData": [{
-                "thick": Settings.wall.width,
-                "start": {
-                    "x": 447,
-                    "y": 458
-                },
-                "end": {
-                    "x": 447,
-                    "y": 744
-                },
-                "type": "normal",
-                "parent": 5,
-                "child": 1,
-                "angle": 1.5707963267948966,
-                "equations": {
-                    "up": {
-                        "A": "v",
-                        "B": 457
+                    "thick": Settings.wall.width,
+                    "start": {
+                        "x": 447,
+                        "y": 458
                     },
-                    "down": {
-                        "A": "v",
-                        "B": 437
+                    "end": {
+                        "x": 447,
+                        "y": 744
                     },
-                    "base": {
-                        "A": "v",
-                        "B": 447
+                    "type": "normal",
+                    "parent": 5,
+                    "child": 1,
+                    "angle": 1.5707963267948966,
+                    "equations": {
+                        "up": {
+                            "A": "v",
+                            "B": 457
+                        },
+                        "down": {
+                            "A": "v",
+                            "B": 437
+                        },
+                        "base": {
+                            "A": "v",
+                            "B": 447
+                        }
+                    },
+                    "coords": [{
+                            "x": 457,
+                            "y": 468
+                        }, {
+                            "x": 437,
+                            "y": 448
+                        }, {
+                            "x": 437,
+                            "y": 754
+                        }, {
+                            "x": 457,
+                            "y": 734
+                        }],
+                    "graph": {
+                        "0": {},
+                        "context": {},
+                        "length": 1
                     }
-                },
-                "coords": [{
-                    "x": 457,
-                    "y": 468
                 }, {
-                    "x": 437,
-                    "y": 448
-                }, {
-                    "x": 437,
-                    "y": 754
-                }, {
-                    "x": 457,
-                    "y": 734
-                }],
-                "graph": {
-                    "0": {},
-                    "context": {},
-                    "length": 1
-                }
-            }, {
-                "thick": Settings.wall.width,
-                "start": {
-                    "x": 447,
-                    "y": 744
-                },
-                "end": {
-                    "x": 1347,
-                    "y": 744
-                },
-                "type": "normal",
-                "parent": 0,
-                "child": 2,
-                "angle": 0,
-                "equations": {
-                    "up": {
-                        "A": "h",
-                        "B": 734
+                    "thick": Settings.wall.width,
+                    "start": {
+                        "x": 447,
+                        "y": 744
                     },
-                    "down": {
-                        "A": "h",
-                        "B": 754
+                    "end": {
+                        "x": 1347,
+                        "y": 744
                     },
-                    "base": {
-                        "A": "h",
-                        "B": 744
+                    "type": "normal",
+                    "parent": 0,
+                    "child": 2,
+                    "angle": 0,
+                    "equations": {
+                        "up": {
+                            "A": "h",
+                            "B": 734
+                        },
+                        "down": {
+                            "A": "h",
+                            "B": 754
+                        },
+                        "base": {
+                            "A": "h",
+                            "B": 744
+                        }
+                    },
+                    "coords": [{
+                            "x": 457,
+                            "y": 734
+                        }, {
+                            "x": 437,
+                            "y": 754
+                        }, {
+                            "x": 1357,
+                            "y": 754
+                        }, {
+                            "x": 1337,
+                            "y": 734
+                        }],
+                    "graph": {
+                        "0": {},
+                        "context": {},
+                        "length": 1
                     }
-                },
-                "coords": [{
-                    "x": 457,
-                    "y": 734
                 }, {
-                    "x": 437,
-                    "y": 754
-                }, {
-                    "x": 1357,
-                    "y": 754
-                }, {
-                    "x": 1337,
-                    "y": 734
-                }],
-                "graph": {
-                    "0": {},
-                    "context": {},
-                    "length": 1
-                }
-            }, {
-                "thick": Settings.wall.width,
-                "start": {
-                    "x": 1347,
-                    "y": 744
-                },
-                "end": {
-                    "x": 1347,
-                    "y": 144
-                },
-                "type": "normal",
-                "parent": 1,
-                "child": 3,
-                "angle": -1.5707963267948966,
-                "equations": {
-                    "up": {
-                        "A": "v",
-                        "B": 1337
+                    "thick": Settings.wall.width,
+                    "start": {
+                        "x": 1347,
+                        "y": 744
                     },
-                    "down": {
-                        "A": "v",
-                        "B": 1357
+                    "end": {
+                        "x": 1347,
+                        "y": 144
                     },
-                    "base": {
-                        "A": "v",
-                        "B": 1347
+                    "type": "normal",
+                    "parent": 1,
+                    "child": 3,
+                    "angle": -1.5707963267948966,
+                    "equations": {
+                        "up": {
+                            "A": "v",
+                            "B": 1337
+                        },
+                        "down": {
+                            "A": "v",
+                            "B": 1357
+                        },
+                        "base": {
+                            "A": "v",
+                            "B": 1347
+                        }
+                    },
+                    "coords": [{
+                            "x": 1337,
+                            "y": 734
+                        }, {
+                            "x": 1357,
+                            "y": 754
+                        }, {
+                            "x": 1357,
+                            "y": 134
+                        }, {
+                            "x": 1337,
+                            "y": 154
+                        }],
+                    "graph": {
+                        "0": {},
+                        "context": {},
+                        "length": 1
                     }
-                },
-                "coords": [{
-                    "x": 1337,
-                    "y": 734
                 }, {
-                    "x": 1357,
-                    "y": 754
-                }, {
-                    "x": 1357,
-                    "y": 134
-                }, {
-                    "x": 1337,
-                    "y": 154
-                }],
-                "graph": {
-                    "0": {},
-                    "context": {},
-                    "length": 1
-                }
-            }, {
-                "thick": Settings.wall.width,
-                "start": {
-                    "x": 1347,
-                    "y": 144
-                },
-                "end": {
-                    "x": 1020,
-                    "y": 144
-                },
-                "type": "normal",
-                "parent": 2,
-                "child": 4,
-                "angle": 3.141592653589793,
-                "equations": {
-                    "up": {
-                        "A": "h",
-                        "B": 154
+                    "thick": Settings.wall.width,
+                    "start": {
+                        "x": 1347,
+                        "y": 144
                     },
-                    "down": {
-                        "A": "h",
-                        "B": 134
+                    "end": {
+                        "x": 1020,
+                        "y": 144
                     },
-                    "base": {
-                        "A": "h",
-                        "B": 144
+                    "type": "normal",
+                    "parent": 2,
+                    "child": 4,
+                    "angle": 3.141592653589793,
+                    "equations": {
+                        "up": {
+                            "A": "h",
+                            "B": 154
+                        },
+                        "down": {
+                            "A": "h",
+                            "B": 134
+                        },
+                        "base": {
+                            "A": "h",
+                            "B": 144
+                        }
+                    },
+                    "coords": [{
+                            "x": 1337,
+                            "y": 154
+                        }, {
+                            "x": 1357,
+                            "y": 134
+                        }, {
+                            "x": 1010,
+                            "y": 134
+                        }, {
+                            "x": 1030,
+                            "y": 154
+                        }],
+                    "graph": {
+                        "0": {},
+                        "context": {},
+                        "length": 1
                     }
-                },
-                "coords": [{
-                    "x": 1337,
-                    "y": 154
                 }, {
-                    "x": 1357,
-                    "y": 134
-                }, {
-                    "x": 1010,
-                    "y": 134
-                }, {
-                    "x": 1030,
-                    "y": 154
-                }],
-                "graph": {
-                    "0": {},
-                    "context": {},
-                    "length": 1
-                }
-            }, {
-                "thick": Settings.wall.width,
-                "start": {
-                    "x": 1020,
-                    "y": 144
-                },
-                "end": {
-                    "x": 1020,
-                    "y": 458
-                },
-                "type": "normal",
-                "parent": 3,
-                "child": 5,
-                "angle": 1.5707963267948966,
-                "equations": {
-                    "up": {
-                        "A": "v",
-                        "B": 1030
+                    "thick": Settings.wall.width,
+                    "start": {
+                        "x": 1020,
+                        "y": 144
                     },
-                    "down": {
-                        "A": "v",
-                        "B": 1010
+                    "end": {
+                        "x": 1020,
+                        "y": 458
                     },
-                    "base": {
-                        "A": "v",
-                        "B": 1020
+                    "type": "normal",
+                    "parent": 3,
+                    "child": 5,
+                    "angle": 1.5707963267948966,
+                    "equations": {
+                        "up": {
+                            "A": "v",
+                            "B": 1030
+                        },
+                        "down": {
+                            "A": "v",
+                            "B": 1010
+                        },
+                        "base": {
+                            "A": "v",
+                            "B": 1020
+                        }
+                    },
+                    "coords": [{
+                            "x": 1030,
+                            "y": 154
+                        }, {
+                            "x": 1010,
+                            "y": 134
+                        }, {
+                            "x": 1010,
+                            "y": 448
+                        }, {
+                            "x": 1030,
+                            "y": 468
+                        }],
+                    "graph": {
+                        "0": {},
+                        "context": {},
+                        "length": 1
                     }
-                },
-                "coords": [{
-                    "x": 1030,
-                    "y": 154
                 }, {
-                    "x": 1010,
-                    "y": 134
-                }, {
-                    "x": 1010,
-                    "y": 448
-                }, {
-                    "x": 1030,
-                    "y": 468
-                }],
-                "graph": {
-                    "0": {},
-                    "context": {},
-                    "length": 1
-                }
-            }, {
-                "thick": Settings.wall.width,
-                "start": {
-                    "x": 1020,
-                    "y": 458
-                },
-                "end": {
-                    "x": 447,
-                    "y": 458
-                },
-                "type": "normal",
-                "parent": 4,
-                "child": 0,
-                "angle": 3.141592653589793,
-                "equations": {
-                    "up": {
-                        "A": "h",
-                        "B": 468
+                    "thick": Settings.wall.width,
+                    "start": {
+                        "x": 1020,
+                        "y": 458
                     },
-                    "down": {
-                        "A": "h",
-                        "B": 448
+                    "end": {
+                        "x": 447,
+                        "y": 458
                     },
-                    "base": {
-                        "A": "h",
-                        "B": 458
+                    "type": "normal",
+                    "parent": 4,
+                    "child": 0,
+                    "angle": 3.141592653589793,
+                    "equations": {
+                        "up": {
+                            "A": "h",
+                            "B": 468
+                        },
+                        "down": {
+                            "A": "h",
+                            "B": 448
+                        },
+                        "base": {
+                            "A": "h",
+                            "B": 458
+                        }
+                    },
+                    "coords": [{
+                            "x": 1030,
+                            "y": 468
+                        }, {
+                            "x": 1010,
+                            "y": 448
+                        }, {
+                            "x": 437,
+                            "y": 448
+                        }, {
+                            "x": 457,
+                            "y": 468
+                        }],
+                    "graph": {
+                        "0": {},
+                        "context": {},
+                        "length": 1
                     }
-                },
-                "coords": [{
-                    "x": 1030,
-                    "y": 468
-                }, {
-                    "x": 1010,
-                    "y": 448
-                }, {
-                    "x": 437,
-                    "y": 448
-                }, {
-                    "x": 457,
-                    "y": 468
                 }],
-                "graph": {
-                    "0": {},
-                    "context": {},
-                    "length": 1
-                }
-            }],
             "roomData": [{
-                "coords": [{
-                    "x": 447,
-                    "y": 744
-                }, {
-                    "x": 1347,
-                    "y": 744
-                }, {
-                    "x": 1347,
-                    "y": 144
-                }, {
-                    "x": 1020,
-                    "y": 144
-                }, {
-                    "x": 1020,
-                    "y": 458
-                }, {
-                    "x": 447,
-                    "y": 458
-                }, {
-                    "x": 447,
-                    "y": 744
-                }],
-                "coordsOutside": [{
-                    "x": 1357,
-                    "y": 754
-                }, {
-                    "x": 1357,
-                    "y": 134
-                }, {
-                    "x": 1010,
-                    "y": 134
-                }, {
-                    "x": 1010,
-                    "y": 448
-                }, {
-                    "x": 437,
-                    "y": 448
-                }, {
-                    "x": 437,
-                    "y": 754
-                }, {
-                    "x": 1357,
-                    "y": 754
-                }],
-                "coordsInside": [{
-                    "x": 1337,
-                    "y": 734
-                }, {
-                    "x": 1337,
-                    "y": 154
-                }, {
-                    "x": 1030,
-                    "y": 154
-                }, {
-                    "x": 1030,
-                    "y": 468
-                }, {
-                    "x": 457,
-                    "y": 468
-                }, {
-                    "x": 457,
-                    "y": 734
-                }, {
-                    "x": 1337,
-                    "y": 734
-                }],
-                "inside": [],
-                "way": ["0", "2", "3", "4", "5", "1", "0"],
-                "area": 330478,
-                "surface": "",
-                "name": "",
-                "color": "gradientWhite",
-                "showSurface": true,
-                "action": "add"
-            }]
+                    "coords": [{
+                            "x": 447,
+                            "y": 744
+                        }, {
+                            "x": 1347,
+                            "y": 744
+                        }, {
+                            "x": 1347,
+                            "y": 144
+                        }, {
+                            "x": 1020,
+                            "y": 144
+                        }, {
+                            "x": 1020,
+                            "y": 458
+                        }, {
+                            "x": 447,
+                            "y": 458
+                        }, {
+                            "x": 447,
+                            "y": 744
+                        }],
+                    "coordsOutside": [{
+                            "x": 1357,
+                            "y": 754
+                        }, {
+                            "x": 1357,
+                            "y": 134
+                        }, {
+                            "x": 1010,
+                            "y": 134
+                        }, {
+                            "x": 1010,
+                            "y": 448
+                        }, {
+                            "x": 437,
+                            "y": 448
+                        }, {
+                            "x": 437,
+                            "y": 754
+                        }, {
+                            "x": 1357,
+                            "y": 754
+                        }],
+                    "coordsInside": [{
+                            "x": 1337,
+                            "y": 734
+                        }, {
+                            "x": 1337,
+                            "y": 154
+                        }, {
+                            "x": 1030,
+                            "y": 154
+                        }, {
+                            "x": 1030,
+                            "y": 468
+                        }, {
+                            "x": 457,
+                            "y": 468
+                        }, {
+                            "x": 457,
+                            "y": 734
+                        }, {
+                            "x": 1337,
+                            "y": 734
+                        }],
+                    "inside": [],
+                    "way": ["0", "2", "3", "4", "5", "1", "0"],
+                    "area": 330478,
+                    "surface": "",
+                    "name": "",
+                    "color": "gradientWhite",
+                    "showSurface": true,
+                    "action": "add"
+                }]
         });
         HISTORY[0] = JSON.stringify(HISTORY[0]);
         localStorage.setItem('history', JSON.stringify(HISTORY));
         load(0);
         save();
-    }
+}
 }
 
-document.getElementById('redo').addEventListener("click", function() {
+document.getElementById('redo').addEventListener("click", function () {
     if (HISTORY.index < HISTORY.length) {
         load(HISTORY.index);
         HISTORY.index++;
@@ -678,7 +681,7 @@ document.getElementById('redo').addEventListener("click", function() {
     }
 });
 
-document.getElementById('undo').addEventListener("click", function() {
+document.getElementById('undo').addEventListener("click", function () {
     if (HISTORY.index > 0) {
         $('#undo').removeClass('disabled');
         if (HISTORY.index - 1 > 0) {
@@ -687,24 +690,30 @@ document.getElementById('undo').addEventListener("click", function() {
             $('#redo').removeClass('disabled');
         }
     }
-    if (HISTORY.index == 1) $('#undo').addClass('disabled');
+    if (HISTORY.index == 1)
+        $('#undo').addClass('disabled');
 });
 
 function save(boot = false) {
-    if (boot) localStorage.removeItem('history');
+    if (boot)
+        localStorage.removeItem('history');
     // FOR CYCLIC OBJ INTO LOCALSTORAGE !!!
     for (var k in WALLS) {
-        if (WALLS[k].child != null) WALLS[k].child = WALLS.indexOf(WALLS[k].child);
-        if (WALLS[k].parent != null) WALLS[k].parent = WALLS.indexOf(WALLS[k].parent);
+        if (WALLS[k].child != null)
+            WALLS[k].child = WALLS.indexOf(WALLS[k].child);
+        if (WALLS[k].parent != null)
+            WALLS[k].parent = WALLS.indexOf(WALLS[k].parent);
     }
     if (JSON.stringify({
-            objData: OBJDATA,
-            wallData: WALLS,
-            roomData: ROOM
-        }) == HISTORY[HISTORY.length - 1]) {
+        objData: OBJDATA,
+        wallData: WALLS,
+        roomData: ROOM
+    }) == HISTORY[HISTORY.length - 1]) {
         for (var k in WALLS) {
-            if (WALLS[k].child != null) WALLS[k].child = WALLS[WALLS[k].child];
-            if (WALLS[k].parent != null) WALLS[k].parent = WALLS[WALLS[k].parent];
+            if (WALLS[k].child != null)
+                WALLS[k].child = WALLS[WALLS[k].child];
+            if (WALLS[k].parent != null)
+                WALLS[k].parent = WALLS[WALLS[k].parent];
         }
         return false;
     }
@@ -720,16 +729,20 @@ function save(boot = false) {
     }));
     localStorage.setItem('history', JSON.stringify(HISTORY));
     HISTORY.index++;
-    if (HISTORY.index > 1) $('#undo').removeClass('disabled');
+    if (HISTORY.index > 1)
+        $('#undo').removeClass('disabled');
     for (var k in WALLS) {
-        if (WALLS[k].child != null) WALLS[k].child = WALLS[WALLS[k].child];
-        if (WALLS[k].parent != null) WALLS[k].parent = WALLS[WALLS[k].parent];
+        if (WALLS[k].child != null)
+            WALLS[k].child = WALLS[WALLS[k].child];
+        if (WALLS[k].parent != null)
+            WALLS[k].parent = WALLS[WALLS[k].parent];
     }
     return true;
 }
 
 function load(index = HISTORY.index, boot = false) {
-    if (HISTORY.length == 0 && !boot) return false;
+    if (HISTORY.length == 0 && !boot)
+        return false;
     for (var k in OBJDATA) {
         OBJDATA[k].graph.remove();
     }
@@ -756,9 +769,12 @@ function load(index = HISTORY.index, boot = false) {
 
     for (var k in WALLS) {
         // Assign an id to each wall if it doesn't have one
-        if(!WALLS[k].id) WALLS[k].id = generateUUID();
-        if (WALLS[k].child != null) WALLS[k].child = WALLS[WALLS[k].child];
-        if (WALLS[k].parent != null) WALLS[k].parent = WALLS[WALLS[k].parent];
+        if (!WALLS[k].id)
+            WALLS[k].id = generateUUID();
+        if (WALLS[k].child != null)
+            WALLS[k].child = WALLS[WALLS[k].child];
+        if (WALLS[k].parent != null)
+            WALLS[k].parent = WALLS[WALLS[k].parent];
     }
     ROOM = historyTemp.roomData;
     editor.architect(WALLS);
@@ -766,7 +782,7 @@ function load(index = HISTORY.index, boot = false) {
     rib();
 }
 
-$('svg').each(function() {
+$('svg').each(function () {
     $(this)[0].setAttribute('viewBox', originX_viewbox + ' ' + originY_viewbox + ' ' + width_viewbox + ' ' + height_viewbox)
 });
 
@@ -774,12 +790,15 @@ $('svg').each(function() {
 // *****************   FUNCTIONS ON BUTTON click     ************************
 // **************************************************************************
 
-document.getElementById('report_mode').addEventListener("click", function() {
-    if (typeof(globalArea) == "undefined") return false;
+document.getElementById('report_mode').addEventListener("click", function () {
+    if (typeof (globalArea) == "undefined")
+        return false;
     mode = "report_mode";
     $('#panel').hide();
-    $('#reportTools').show(200, function() {
-        document.getElementById('reportTotalSurface').innerHTML = "Total de la surface : " + formatArea(getArea(globalArea), 1, function(x) { return `<b>${x}</b>`;});
+    $('#reportTools').show(200, function () {
+        document.getElementById('reportTotalSurface').innerHTML = "Total de la surface : " + formatArea(getArea(globalArea), 1, function (x) {
+            return `<b>${x}</b>`;
+        });
         $('#reportTotalSurface').show(1000);
         document.getElementById('reportNumberSurface').innerHTML = "Nombre pièces : <b>" + ROOM.length + "</b>";
         $('#reportNumberSurface').show(1000);
@@ -787,10 +806,13 @@ document.getElementById('report_mode').addEventListener("click", function() {
         var reportRoom = '<div class="row">\n';
         for (var k in ROOM) {
             var nameRoom = "Pièce n°" + number + " <small>(sans nom)</small>";
-            if (ROOM[k].name != "") nameRoom = ROOM[k].name;
+            if (ROOM[k].name != "")
+                nameRoom = ROOM[k].name;
             reportRoom += '<div class="col-md-6"><p>' + nameRoom + '</p></div>\n';
             // reportRoom += '<div class="col-md-6"><p>Surface : <b>' + ((ROOM[k].area) / 3600).toFixed(2) + '</b> m²</p></div>\n';
-            reportRoom += '<div class="col-md-6"><p>Surface : ' + formatArea(getArea((ROOM[k].area)), 2, function(x) { return `<b>${x}</b>`; }) + '</p></div>\n';
+            reportRoom += '<div class="col-md-6"><p>Surface : ' + formatArea(getArea((ROOM[k].area)), 2, function (x) {
+                return `<b>${x}</b>`;
+            }) + '</p></div>\n';
             number++;
         }
         reportRoom += '</div><hr/>\n';
@@ -800,9 +822,12 @@ document.getElementById('report_mode').addEventListener("click", function() {
         var lampNumber = 0;
         for (var k in OBJDATA) {
             if (OBJDATA[k].class == 'energy') {
-                if (OBJDATA[k].type == 'switch' || OBJDATA[k].type == 'doubleSwitch' || OBJDATA[k].type == 'dimmer') switchNumber++;
-                if (OBJDATA[k].type == 'plug' || OBJDATA[k].type == 'plug20' || OBJDATA[k].type == 'plug32') plugNumber++;
-                if (OBJDATA[k].type == 'wallLight' || OBJDATA[k].type == 'roofLight') lampNumber++;
+                if (OBJDATA[k].type == 'switch' || OBJDATA[k].type == 'doubleSwitch' || OBJDATA[k].type == 'dimmer')
+                    switchNumber++;
+                if (OBJDATA[k].type == 'plug' || OBJDATA[k].type == 'plug20' || OBJDATA[k].type == 'plug32')
+                    plugNumber++;
+                if (OBJDATA[k].type == 'wallLight' || OBJDATA[k].type == 'roofLight')
+                    lampNumber++;
             }
         }
         reportRoom += '<p>Nombre d\'interrupteur(s) : ' + switchNumber + '</p>';
@@ -824,7 +849,8 @@ document.getElementById('report_mode').addEventListener("click", function() {
         for (var k in ROOM) {
             reportRoom += '<div class="row">\n';
             var nameRoom = "Pièce n°" + number + " <small>(sans nom)</small>";
-            if (ROOM[k].name != "") nameRoom = ROOM[k].name;
+            if (ROOM[k].name != "")
+                nameRoom = ROOM[k].name;
             reportRoom += '<div class="col-md-4"><p>' + nameRoom + '</p></div>\n';
             var switchNumber = 0;
             var plugNumber = 0;
@@ -837,7 +863,8 @@ document.getElementById('report_mode').addEventListener("click", function() {
                 if (OBJDATA[i].class == 'energy') {
                     if (OBJDATA[i].type == 'switch' || OBJDATA[i].type == 'doubleSwitch' || OBJDATA[i].type == 'dimmer') {
                         if (roomTarget = editor.rayCastingRoom(OBJDATA[i])) {
-                            if (isObjectsEquals(ROOM[k], roomTarget)) switchNumber++;
+                            if (isObjectsEquals(ROOM[k], roomTarget))
+                                switchNumber++;
                         }
                     }
                     if (OBJDATA[i].type == 'plug' || OBJDATA[i].type == 'plug20' || OBJDATA[i].type == 'plug32') {
@@ -870,7 +897,7 @@ document.getElementById('report_mode').addEventListener("click", function() {
                 }
             }
             roomEnergy.push({
-                switch: switchNumber,
+                switch : switchNumber,
                 plug: plugNumber,
                 plug20: plug20,
                 plug32: plug32,
@@ -890,11 +917,13 @@ document.getElementById('report_mode').addEventListener("click", function() {
             reportRoom += '<div class="row">\n';
             var nfc = true;
             var nameRoom = "Pièce n°" + number + " <small>(sans nom)</small>";
-            if (ROOM[k].name != "") nameRoom = ROOM[k].name;
+            if (ROOM[k].name != "")
+                nameRoom = ROOM[k].name;
             reportRoom += '<div class="col-md-4"><p>' + nameRoom + '</p></div>\n';
             if (ROOM[k].name == "") {
                 reportRoom += '<div class="col-md-8"><p><i class="fa fa-ban" aria-hidden="true" style="color:red"></i> La pièce n\'ayant pas de libellé, Home Rough Editor ne peut vous fournir d\'informations.</p></div>\n';
-            } else {
+            }
+            else {
                 if (ROOM[k].name == "Salon") {
                     for (var g in ROOM) {
                         if (ROOM[g].name == "Salle à manger") {
@@ -912,7 +941,8 @@ document.getElementById('report_mode').addEventListener("click", function() {
                         reportRoom += '<p><i class="fa fa-exclamation-triangle" style="color:orange" aria-hidden="true"></i> Cette pièce doit disposer d\'au moins <b>5 prises de courant</b> <small>(actuellement ' + roomEnergy[k].plug + ')</small>.</p>\n';
                         nfc = false;
                     }
-                    if (nfc) reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
+                    if (nfc)
+                        reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
                     reportRoom += '</div>';
                 }
                 if (ROOM[k].name == "Salle à manger") {
@@ -928,7 +958,8 @@ document.getElementById('report_mode').addEventListener("click", function() {
                         reportRoom += '<p><i class="fa fa-exclamation-triangle" style="color:orange" aria-hidden="true"></i> Cette pièce doit disposer d\'au moins <b>3 prises de courant</b> <small>(actuellement ' + roomEnergy[k].plug + ')</small>.</p>\n';
                         nfc = false;
                     }
-                    if (nfc) reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
+                    if (nfc)
+                        reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
                     reportRoom += '</div>';
                 }
                 if (ROOM[k].name == "SdB") {
@@ -942,10 +973,11 @@ document.getElementById('report_mode').addEventListener("click", function() {
                         nfc = false;
                     }
                     if (roomEnergy[k].switch == 0) {
-                        reportRoom += '<p><i class="fa fa-exclamation-triangle" style="color:orange" aria-hidden="true"></i> Cette pièce doit disposer d\'au moins <b>1 interrupteur</b> <small>(actuellement ' + roomEnergy[k].switch+')</small>.</p>\n';
+                        reportRoom += '<p><i class="fa fa-exclamation-triangle" style="color:orange" aria-hidden="true"></i> Cette pièce doit disposer d\'au moins <b>1 interrupteur</b> <small>(actuellement ' + roomEnergy[k].switch + ')</small>.</p>\n';
                         nfc = false;
                     }
-                    if (nfc) reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
+                    if (nfc)
+                        reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
                     reportRoom += '</div>';
                 }
                 if (ROOM[k].name == "Couloir") {
@@ -958,7 +990,8 @@ document.getElementById('report_mode').addEventListener("click", function() {
                         reportRoom += '<p><i class="fa fa-exclamation-triangle" style="color:orange" aria-hidden="true"></i> Cette pièce doit disposer d\'au moins <b>1 prise de courant</b> <small>(actuellement ' + roomEnergy[k].plug + ')</small>.</p>\n';
                         nfc = false;
                     }
-                    if (nfc) reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
+                    if (nfc)
+                        reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
                     reportRoom += '</div>';
                 }
                 if (ROOM[k].name == "Toilette") {
@@ -967,7 +1000,8 @@ document.getElementById('report_mode').addEventListener("click", function() {
                         reportRoom += '<p><i class="fa fa-exclamation-triangle" style="color:orange" aria-hidden="true"></i> Cette pièce doit disposer d\'au moins <b>1 point lumineux</b>. <small>(actuellement ' + roomEnergy[k].light + ')</small>.</p>\n';
                         nfc = false;
                     }
-                    if (nfc) reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
+                    if (nfc)
+                        reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
                     reportRoom += '</div>';
                 }
                 if (ROOM[k].name == "Cuisine") {
@@ -988,7 +1022,8 @@ document.getElementById('report_mode').addEventListener("click", function() {
                         reportRoom += '<p><i class="fa fa-exclamation-triangle" style="color:orange" aria-hidden="true"></i> Cette pièce doit disposer d\'au moins <b>2 prise de courant 20A</b> <small>(actuellement ' + roomEnergy[k].plug20 + ')</small>.</p>\n';
                         nfc = false;
                     }
-                    if (nfc) reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
+                    if (nfc)
+                        reportRoom += '<i class="fa fa-check" aria-hidden="true" style="color:green"></i>';
                     reportRoom += '</div>';
                 }
             }
@@ -1003,7 +1038,7 @@ document.getElementById('report_mode').addEventListener("click", function() {
 
 });
 
-document.getElementById('wallWidth').addEventListener("input", function() {
+document.getElementById('wallWidth').addEventListener("input", function () {
     var sliderValue = this.value;
     //Initial wall thickness
     binder.wall.thick = sliderValue;
@@ -1018,7 +1053,7 @@ document.getElementById('wallWidth').addEventListener("input", function() {
     document.getElementById("wallWidthVal").textContent = formatSmallLength(sliderValue);
 });
 
-document.getElementById("bboxTrash").addEventListener("click", function() {
+document.getElementById("bboxTrash").addEventListener("click", function () {
     binder.obj.graph.remove();
     binder.graph.remove();
     OBJDATA.splice(OBJDATA.indexOf(binder.obj), 1);
@@ -1030,7 +1065,7 @@ document.getElementById("bboxTrash").addEventListener("click", function() {
     rib();
 });
 
-document.getElementById("bboxStepsAdd").addEventListener("click", function() {
+document.getElementById("bboxStepsAdd").addEventListener("click", function () {
     var newValue = document.getElementById("bboxStepsVal").textContent;
     if (newValue < 15) {
         newValue++;
@@ -1040,7 +1075,7 @@ document.getElementById("bboxStepsAdd").addEventListener("click", function() {
     }
 });
 
-document.getElementById("bboxStepsMinus").addEventListener("click", function() {
+document.getElementById("bboxStepsMinus").addEventListener("click", function () {
     var newValue = document.getElementById("bboxStepsVal").textContent;
     if (newValue > 2) {
         newValue--;
@@ -1050,7 +1085,7 @@ document.getElementById("bboxStepsMinus").addEventListener("click", function() {
     }
 });
 
-document.getElementById('bboxWidth').addEventListener("input", function() {
+document.getElementById('bboxWidth').addEventListener("input", function () {
     var sliderValue = this.value;
     var objTarget = binder.obj;
     objTarget.size = (sliderValue / 100) * meter;
@@ -1060,7 +1095,7 @@ document.getElementById('bboxWidth').addEventListener("input", function() {
     document.getElementById("bboxWidthVal").textContent = sliderValue;
 });
 
-document.getElementById('bboxHeight').addEventListener("input", function() {
+document.getElementById('bboxHeight').addEventListener("input", function () {
     var sliderValue = this.value;
     var objTarget = binder.obj;
     objTarget.thick = (sliderValue / 100) * meter;
@@ -1070,7 +1105,7 @@ document.getElementById('bboxHeight').addEventListener("input", function() {
     document.getElementById("bboxHeightVal").textContent = sliderValue;
 });
 
-document.getElementById('bboxRotation').addEventListener("input", function() {
+document.getElementById('bboxRotation').addEventListener("input", function () {
     var sliderValue = this.value;
     var objTarget = binder.obj;
     objTarget.angle = sliderValue;
@@ -1080,11 +1115,12 @@ document.getElementById('bboxRotation').addEventListener("input", function() {
     document.getElementById("bboxRotationVal").textContent = sliderValue;
 });
 
-document.getElementById('doorWindowWidth').addEventListener("input", function() {
+document.getElementById('doorWindowWidth').addEventListener("input", function () {
     var sliderValue = this.value;
     var objTarget = binder.obj;
     var wallBind = editor.rayCastingWalls(objTarget, WALLS);
-    if (wallBind.length > 1) wallBind = wallBind[wallBind.length - 1];
+    if (wallBind.length > 1)
+        wallBind = wallBind[wallBind.length - 1];
     var limits = limitObj(wallBind.equations.base, sliderValue, objTarget);
     if (qSVG.btwn(limits[1].x, wallBind.start.x, wallBind.end.x) && qSVG.btwn(limits[1].y, wallBind.start.y, wallBind.end.y) && qSVG.btwn(limits[0].x, wallBind.start.x, wallBind.end.x) && qSVG.btwn(limits[0].y, wallBind.start.y, wallBind.end.y)) {
         objTarget.size = sliderValue;
@@ -1098,29 +1134,32 @@ document.getElementById('doorWindowWidth').addEventListener("input", function() 
     inWallRib(wallBind);
 });
 
-document.getElementById("objToolsHinge").addEventListener("click", function() {
+document.getElementById("objToolsHinge").addEventListener("click", function () {
     var objTarget = binder.obj;
     var hingeStatus = objTarget.hinge; // normal - reverse
-    if (hingeStatus == 'normal') objTarget.hinge = 'reverse';
-    else objTarget.hinge = 'normal';
+    if (hingeStatus == 'normal')
+        objTarget.hinge = 'reverse';
+    else
+        objTarget.hinge = 'normal';
     objTarget.update();
 });
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
     document.getElementById('panel').style.transform = "translateX(200px)";
-    document.getElementById('panel').addEventListener("transitionend", function() {
+    document.getElementById('panel').addEventListener("transitionend", function () {
         document.getElementById('moveBox').style.transform = "translateX(-165px)";
         document.getElementById('zoomBox').style.transform = "translateX(-165px)";
     });
-    if (!localStorage.getItem('history')) $('#recover').html("<p>Select a plan type.");
+    if (!localStorage.getItem('history'))
+        $('#recover').html("<p>Select a plan type.");
     $('#myModal').modal();
 });
 
-document.getElementById('sizePolice').addEventListener("input", function() {
+document.getElementById('sizePolice').addEventListener("input", function () {
     document.getElementById('labelBox').style.fontSize = this.value + 'px';
 });
 
-$('#textToLayer').on('hidden.bs.modal', function(e) {
+$('#textToLayer').on('hidden.bs.modal', function (e) {
     fonc_button('select_mode');
     action = 0;
     var textToMake = document.getElementById('labelBox').textContent;
@@ -1137,7 +1176,8 @@ $('#textToLayer').on('hidden.bs.modal', function(e) {
         delete binder;
         $('#boxinfo').html('Texte ajouté');
         save();
-    } else {
+    }
+    else {
         $('#boxinfo').html(Settings.language.MODE_SELECTION_TEXT);
     }
     document.getElementById('labelBox').textContent = Settings.language.LABEL_BOX_TEXT;
@@ -1148,7 +1188,7 @@ $('#textToLayer').on('hidden.bs.modal', function(e) {
 
 if (!Array.prototype.includes) {
     Object.defineProperty(Array.prototype, 'includes', {
-        value: function(searchElement, fromIndex) {
+        value: function (searchElement, fromIndex) {
             if (this == null) {
                 throw new TypeError('"this" is null or not defined');
             }
@@ -1173,7 +1213,8 @@ if (!Array.prototype.includes) {
 }
 
 function isObjectsEquals(a, b, message = false) {
-    if (message) console.log(message)
+    if (message)
+        console.log(message)
     var isOK = true;
     for (var prop in a) {
         if (a[prop] !== b[prop]) {
@@ -1182,70 +1223,77 @@ function isObjectsEquals(a, b, message = false) {
         }
     }
     return isOK;
-};
+}
+;
 
 function throttle(callback, delay) {
     var last;
     var timer;
-    return function() {
+    return function () {
         var context = this;
         var now = +new Date();
         var args = arguments;
         if (last && now < last + delay) {
             // le délai n'est pas écoulé on reset le timer
             clearTimeout(timer);
-            timer = setTimeout(function() {
+            timer = setTimeout(function () {
                 last = now;
                 callback.apply(context, args);
             }, delay);
-        } else {
+        }
+        else {
             last = now;
             callback.apply(context, args);
         }
     };
 }
 
-$("#lin").mousewheel(throttle(function(event) {
+$("#lin").mousewheel(throttle(function (event) {
     event.preventDefault();
     if (event.deltaY > 0) {
         zoom_maker('zoomin', 200);
-    } else {
+    }
+    else {
         zoom_maker('zoomout', 200);
     }
 }, 100));
 
-document.getElementById("showRib").addEventListener("click", function() {
+document.getElementById("showRib").addEventListener("click", function () {
     if (document.getElementById("showRib").checked) {
         $('#boxScale').show(200);
         $('#boxRib').show(200);
         showRib = true;
-    } else {
+    }
+    else {
         $('#boxScale').hide(100);
         $('#boxRib').hide(100);
         showRib = false;
     }
 });
 
-document.getElementById("showArea").addEventListener("click", function() {
+document.getElementById("showArea").addEventListener("click", function () {
     if (document.getElementById("showArea").checked) {
         $('#boxArea').show(200);
-    } else {
+    }
+    else {
         $('#boxArea').hide(100);
     }
 });
 
-document.getElementById("showLayerRoom").addEventListener("click", function() {
+document.getElementById("showLayerRoom").addEventListener("click", function () {
     if (document.getElementById("showLayerRoom").checked) {
         $('#boxRoom').show(200);
-    } else {
+    }
+    else {
         $('#boxRoom').hide(100);
     }
 });
 
-document.getElementById("showLayerEnergy").addEventListener("click", function() {
+document.getElementById("showLayerEnergy").addEventListener("click", function () {
     if (document.getElementById("showLayerEnergy").checked) {
         $('#boxEnergy').show(200);
-    } else {
+    }
+    else {
         $('#boxEnergy').hide(100);
     }
 });
@@ -1259,7 +1307,7 @@ document.getElementById("showLayerEnergy").addEventListener("click", function() 
 //   }
 // });
 
-document.getElementById("applySurface").addEventListener("click", function() {
+document.getElementById("applySurface").addEventListener("click", function () {
     $('#roomTools').hide(100);
     $('#panel').show(200);
     binder.remove();
@@ -1270,7 +1318,8 @@ document.getElementById("applySurface").addEventListener("click", function() {
     ROOM[id].color = data;
     //ROOM NAME
     var roomName = $('#roomName').val();
-    if (roomName == 'None') roomName = '';
+    if (roomName == 'None')
+        roomName = '';
     ROOM[id].name = roomName;
     //ROOM SURFACE
     var area = $('#roomSurface').val();
@@ -1281,8 +1330,10 @@ document.getElementById("applySurface").addEventListener("click", function() {
     //ACTION PARAM
     var action = document.querySelector('input[type=radio]:checked').value;
     ROOM[id].action = action;
-    if (action == 'sub') ROOM[id].color = 'hatch';
-    if (action != 'sub' && data == 'hatch') ROOM[id].color = 'gradientNeutral';
+    if (action == 'sub')
+        ROOM[id].color = 'hatch';
+    if (action != 'sub' && data == 'hatch')
+        ROOM[id].color = 'gradientNeutral';
     $('#boxRoom').empty();
     $('#boxSurface').empty();
     editor.roomMaker(Rooms);
@@ -1290,7 +1341,7 @@ document.getElementById("applySurface").addEventListener("click", function() {
     fonc_button('select_mode');
 });
 
-document.getElementById("resetRoomTools").addEventListener("click", function() {
+document.getElementById("resetRoomTools").addEventListener("click", function () {
     $('#roomTools').hide(100);
     $('#panel').show(200);
     binder.remove();
@@ -1300,10 +1351,11 @@ document.getElementById("resetRoomTools").addEventListener("click", function() {
 
 });
 
-document.getElementById("wallTrash").addEventListener("click", function() {
+document.getElementById("wallTrash").addEventListener("click", function () {
     var wall = binder.wall;
     for (var k in WALLS) {
-        if (isObjectsEquals(WALLS[k].child, wall)) WALLS[k].child = null;
+        if (isObjectsEquals(WALLS[k].child, wall))
+            WALLS[k].child = null;
         if (isObjectsEquals(WALLS[k].parent, wall)) {
             WALLS[k].parent = null;
         }
@@ -1320,14 +1372,14 @@ document.getElementById("wallTrash").addEventListener("click", function() {
 
 var textEditorColorBtn = document.querySelectorAll('.textEditorColor');
 for (var k = 0; k < textEditorColorBtn.length; k++) {
-    textEditorColorBtn[k].addEventListener('click', function() {
+    textEditorColorBtn[k].addEventListener('click', function () {
         document.getElementById('labelBox').style.color = this.style.color;
     });
 }
 
 var zoomBtn = document.querySelectorAll('.zoom');
 for (var k = 0; k < zoomBtn.length; k++) {
-    zoomBtn[k].addEventListener("click", function() {
+    zoomBtn[k].addEventListener("click", function () {
         lens = this.getAttribute('data-zoom');
         zoom_maker(lens, 200, 50);
     })
@@ -1335,7 +1387,7 @@ for (var k = 0; k < zoomBtn.length; k++) {
 
 var roomColorBtn = document.querySelectorAll(".roomColor");
 for (var k = 0; k < roomColorBtn.length; k++) {
-    roomColorBtn[k].addEventListener("click", function() {
+    roomColorBtn[k].addEventListener("click", function () {
         var data = this.getAttribute('data-type');
         $('#roomBackground').val(data);
         binder.attr({
@@ -1346,7 +1398,7 @@ for (var k = 0; k < roomColorBtn.length; k++) {
 
 var objTrashBtn = document.querySelectorAll(".objTrash");
 for (var k = 0; k < objTrashBtn.length; k++) {
-    objTrashBtn[k].addEventListener("click", function() {
+    objTrashBtn[k].addEventListener("click", function () {
         $('#objTools').hide('100');
         var obj = binder.obj;
         obj.graph.remove();
@@ -1363,17 +1415,20 @@ for (var k = 0; k < objTrashBtn.length; k++) {
 
 var dropdownMenu = document.querySelectorAll(".dropdown-menu li a");
 for (var k = 0; k < dropdownMenu.length; k++) {
-    dropdownMenu[k].addEventListener("click", function() {
+    dropdownMenu[k].addEventListener("click", function () {
         var selText = this.textContent;
         $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-        if (selText != 'None') $('#roomName').val(selText);
-        else $('#roomName').val('');
+        if (selText != 'None')
+            $('#roomName').val(selText);
+        else
+            $('#roomName').val('');
     });
 }
 
 // TRY MATRIX CALC FOR BBOX REAL COORDS WITH TRAS + ROT.
 function matrixCalc(el, message = false) {
-    if (message) console.log("matrixCalc called by -> " + message);
+    if (message)
+        console.log("matrixCalc called by -> " + message);
     var m = el.getCTM();
     var bb = el.getBBox();
     var tpts = [
@@ -1400,7 +1455,8 @@ function realBboxShow(coords) {
 
 
 function limitObj(equation, size, coords, message = false) {
-    if (message) console.log(message)
+    if (message)
+        console.log(message)
     var Px = coords.x;
     var Py = coords.y;
     var Aq = equation.A;
@@ -1414,7 +1470,8 @@ function limitObj(equation, size, coords, message = false) {
             x: Px,
             y: Py + size / 2
         };
-    } else if (Aq == 'h') {
+    }
+    else if (Aq == 'h') {
         var pos1 = {
             x: Px - size / 2,
             y: Py
@@ -1423,7 +1480,8 @@ function limitObj(equation, size, coords, message = false) {
             x: Px + size / 2,
             y: Py
         };
-    } else {
+    }
+    else {
         var A = 1 + Aq * Aq;
         var B = (-2 * Px) + (2 * Aq * Bq) + (-2 * Py * Aq);
         var C = (Px * Px) + (Bq * Bq) - (2 * Py * Bq) + (Py * Py) - (size * size) / 4; // -N
@@ -1490,7 +1548,7 @@ function zoom_maker(lens, xmove, xview) {
         originX_viewbox -= xmove;
         originY_viewbox -= xview;
     }
-    $('svg').each(function() {
+    $('svg').each(function () {
         $(this)[0].setAttribute('viewBox', originX_viewbox + ' ' + originY_viewbox + ' ' + width_viewbox + ' ' + height_viewbox)
     });
 }
@@ -1504,7 +1562,8 @@ function calcul_snap(event, state) {
         eX = touches[0].pageX;
         eY = touches[0].pageY;
         tactile = true;
-    } else {
+    }
+    else {
         eX = event.pageX;
         eY = event.pageY;
     }
@@ -1527,12 +1586,12 @@ function calcul_snap(event, state) {
     };
 }
 
-minMoveGrid = function(mouse) {
+minMoveGrid = function (mouse) {
     return Math.abs(Math.abs(pox - mouse.x) + Math.abs(poy - mouse.y));
 }
 
 function intersectionOff() {
-    if (typeof(lineIntersectionP) != 'undefined') {
+    if (typeof (lineIntersectionP) != 'undefined') {
         lineIntersectionP.remove();
         delete lineIntersectionP;
     }
@@ -1545,12 +1604,12 @@ function intersection(snap, range = Infinity, except = ['']) {
 
     bestEqPoint.distance = range;
 
-    if (typeof(lineIntersectionP) != 'undefined') {
+    if (typeof (lineIntersectionP) != 'undefined') {
         lineIntersectionP.remove();
         delete lineIntersectionP;
     }
 
-    lineIntersectionP = qSVG.create("boxbind", "path", { // ORANGE TEMP LINE FOR ANGLE 0 90 45 -+
+    lineIntersectionP = qSVG.create("boxbind", "path", {// ORANGE TEMP LINE FOR ANGLE 0 90 45 -+
         d: "",
         "stroke": "transparent",
         "stroke-width": 0.5,
@@ -1575,7 +1634,8 @@ function intersection(snap, range = Infinity, except = ['']) {
                 equation.H = x2;
                 equation.I = 'h'; // I/J equation Segment
                 equation.J = y2;
-            } else if (Math.abs(x2 - x1) == 0) {
+            }
+            else if (Math.abs(x2 - x1) == 0) {
                 equation.C = 'h'; // C/D equation 90° Coef = -1/E
                 equation.D = y1;
                 equation.E = 'v'; // E/F equation Segment
@@ -1584,7 +1644,8 @@ function intersection(snap, range = Infinity, except = ['']) {
                 equation.H = y2;
                 equation.I = 'v'; // I/J equation Segment
                 equation.J = x2;
-            } else {
+            }
+            else {
                 equation.C = (x1 - x2) / (y2 - y1);
                 equation.D = y1 - (x1 * equation.C);
                 equation.E = (y2 - y1) / (x2 - x1);
@@ -1655,12 +1716,13 @@ function intersection(snap, range = Infinity, except = ['']) {
 
     if (bestEqPoint.distance < range) {
         if (bestEqPoint.way == 2) {
-            lineIntersectionP.attr({ // ORANGE TEMP LINE FOR ANGLE 0 90 45 -+
+            lineIntersectionP.attr({// ORANGE TEMP LINE FOR ANGLE 0 90 45 -+
                 d: "M" + bestEqPoint.x1 + "," + bestEqPoint.y1 + " L" + bestEqPoint.x2 + "," + bestEqPoint.y2 + " L" + bestEqPoint.x + "," + bestEqPoint.y,
                 "stroke": "#d7ac57"
             });
-        } else {
-            lineIntersectionP.attr({ // ORANGE TEMP LINE FOR ANGLE 0 90 45 -+
+        }
+        else {
+            lineIntersectionP.attr({// ORANGE TEMP LINE FOR ANGLE 0 90 45 -+
                 d: "M" + bestEqPoint.x2 + "," + bestEqPoint.y2 + " L" + bestEqPoint.x1 + "," + bestEqPoint.y1 + " L" + bestEqPoint.x + "," + bestEqPoint.y,
                 "stroke": "#d7ac57"
             });
@@ -1671,9 +1733,10 @@ function intersection(snap, range = Infinity, except = ['']) {
             wall: WALLS[bestEqPoint.node],
             distance: bestEqPoint.distance
         });
-    } else {
-        return false;
     }
+    else {
+        return false;
+}
 }
 
 function debugPoint(point, name, color = "#00ff00") {
@@ -1704,7 +1767,7 @@ function showJunction() {
     }
 }
 
-$('.visu').mouseover(function() {
+$('.visu').mouseover(function () {
     console.log(this.id)
 });
 
@@ -1725,7 +1788,8 @@ function allRib() {
 }
 
 function inWallRib(wall, option = false) {
-    if (!option) $('#boxRib').empty();
+    if (!option)
+        $('#boxRib').empty();
     ribMaster = [];
     ribMaster.push([]);
     ribMaster.push([]);
@@ -1808,10 +1872,10 @@ function inWallRib(wall, option = false) {
         coords: wall.coords[2],
         distance: distance
     });
-    ribMaster[0].sort(function(a, b) {
+    ribMaster[0].sort(function (a, b) {
         return (a.distance - b.distance).toFixed(2);
     });
-    ribMaster[1].sort(function(a, b) {
+    ribMaster[1].sort(function (a, b) {
         return (a.distance - b.distance).toFixed(2);
     });
     for (var t in ribMaster) {
@@ -1829,7 +1893,9 @@ function inWallRib(wall, option = false) {
                     angleText -= 180;
                     if (ribMaster[t][n - 1].side == 'down') {
                         shift = -5;
-                    } else shift = -shift + 10;
+                    }
+                    else
+                        shift = -shift + 10;
                 }
 
 
@@ -1846,7 +1912,9 @@ function inWallRib(wall, option = false) {
                 if (sizeText[n].textContent < 1) {
                     sizeText[n].setAttributeNS(null, 'font-size', '0.8em');
                     sizeText[n].textContent = sizeText[n].textContent.substring(1, sizeText[n].textContent.length);
-                } else sizeText[n].setAttributeNS(null, 'font-size', '1em');
+                }
+                else
+                    sizeText[n].setAttributeNS(null, 'font-size', '1em');
                 sizeText[n].setAttributeNS(null, 'stroke-width', '0.27px');
                 sizeText[n].setAttributeNS(null, 'fill', '#666666');
                 sizeText[n].setAttribute("transform", "rotate(" + angleText + " " + startText.x + "," + (startText.y) + ")");
@@ -1854,7 +1922,7 @@ function inWallRib(wall, option = false) {
                 $('#boxRib').append(sizeText[n]);
             }
         }
-    }
+}
 }
 
 function rib(shift = 5) {
@@ -1958,18 +2026,19 @@ function rib(shift = 5) {
     }
 
     for (var a in ribMaster[0]) {
-        ribMaster[0][a].sort(function(a, b) {
+        ribMaster[0][a].sort(function (a, b) {
             return (a.distance - b.distance).toFixed(2);
         });
     }
     for (var a in ribMaster[1]) {
-        ribMaster[1][a].sort(function(a, b) {
+        ribMaster[1][a].sort(function (a, b) {
             return (a.distance - b.distance).toFixed(2);
         });
     }
 
     var sizeText = [];
-    if (shift == 5) $('#boxRib').empty();
+    if (shift == 5)
+        $('#boxRib').empty();
     for (var t in ribMaster) {
         for (var a in ribMaster[t]) {
             for (var n = 1; n < ribMaster[t][a].length; n++) {
@@ -2022,7 +2091,9 @@ function rib(shift = 5) {
                             angleText -= 180;
                             if (ribMaster[t][a][n - 1].side == 'down') {
                                 shiftValue = -shift;
-                            } else shiftValue = -shiftValue + 10;
+                            }
+                            else
+                                shiftValue = -shiftValue + 10;
                         }
                         sizeText[n] = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                         var startText = qSVG.middle(ribMaster[t][a][n - 1].coords.x, ribMaster[t][a][n - 1].coords.y, ribMaster[t][a][n].coords.x, ribMaster[t][a][n].coords.y);
@@ -2036,7 +2107,9 @@ function rib(shift = 5) {
                         if (sizeText[n].textContent < 1) {
                             sizeText[n].setAttributeNS(null, 'font-size', '0.73em');
                             sizeText[n].textContent = sizeText[n].textContent.substring(1, sizeText[n].textContent.length);
-                        } else sizeText[n].setAttributeNS(null, 'font-size', '0.9em');
+                        }
+                        else
+                            sizeText[n].setAttributeNS(null, 'font-size', '0.9em');
                         sizeText[n].setAttributeNS(null, 'stroke-width', '0.2px');
                         sizeText[n].setAttributeNS(null, 'fill', '#555555');
                         sizeText[n].setAttribute("transform", "rotate(" + angleText + " " + startText.x + "," + (startText.y) + ")");
@@ -2046,7 +2119,7 @@ function rib(shift = 5) {
                 }
             }
         }
-    }
+}
 }
 
 function cursor(tool) {
@@ -2086,12 +2159,12 @@ function outFullscreen() {
     }
 }
 
-document.addEventListener("fullscreenchange", function() {
+document.addEventListener("fullscreenchange", function () {
     if (
-        !document.fullscreenElement &&
-        !document.webkitFullscreenElement &&
-        !document.mozFullScreenElement &&
-        !document.msFullscreenElement) {
+            !document.fullscreenElement &&
+            !document.webkitFullscreenElement &&
+            !document.mozFullScreenElement &&
+            !document.msFullscreenElement) {
         $('#nofull_mode').display = 'none';
         $('#full_mode').show();
     }
@@ -2135,29 +2208,29 @@ function fonc_button(modesetting, option) {
     mode = modesetting;
     modeOption = option;
 
-    if (typeof(lineIntersectionP) != 'undefined') {
+    if (typeof (lineIntersectionP) != 'undefined') {
         lineIntersectionP.remove();
         delete lineIntersectionP;
     }
 }
 
 
-$('#distance_mode').click(function() {
+$('#distance_mode').click(function () {
     $('#lin').css('cursor', 'crosshair');
     $('#boxinfo').html('Add a measurement');
     fonc_button('distance_mode');
 });
 
 // crumb: select room
-$('#room_mode').click(function() {
+$('#room_mode').click(function () {
     $('#lin').css('cursor', 'pointer');
     $('#boxinfo').html(Settings.language.ROOM_CONFIG_TEXT);
     fonc_button('room_mode');
 });
 
-$('#select_mode').click(function() {
+$('#select_mode').click(function () {
     $('#boxinfo').html('Mode "select"');
-    if (typeof(binder) != 'undefined') {
+    if (typeof (binder) != 'undefined') {
         binder.remove();
         delete binder;
     }
@@ -2165,7 +2238,7 @@ $('#select_mode').click(function() {
     fonc_button('select_mode');
 });
 
-$('#line_mode').click(function() {
+$('#line_mode').click(function () {
     $('#lin').css('cursor', 'crosshair');
     $('#boxinfo').html(Settings.language.ADD_WALL_TEXT);
     multi = 0;
@@ -2177,27 +2250,27 @@ $('#line_mode').click(function() {
     fonc_button('line_mode');
 });
 
-$('#partition_mode').click(function() {
+$('#partition_mode').click(function () {
     $('#lin').css('cursor', 'crosshair');
     $('#boxinfo').html(Settings.language.ADD_PARTITION_TEXT);
     multi = 0;
     fonc_button('partition_mode');
 });
 
-$('#rect_mode').click(function() {
+$('#rect_mode').click(function () {
     $('#lin').css('cursor', 'crosshair');
     $('#boxinfo').html('Création de pièce(s)');
     fonc_button('rect_mode');
 });
 
-$('.door').click(function() {
+$('.door').click(function () {
     $('#lin').css('cursor', 'crosshair');
     $('#boxinfo').html(Settings.language.ADD_DOOR_TEXT);
     $('#door_list').hide(200);
     fonc_button('door_mode', this.id);
 });
 
-$('.window').click(function() {
+$('.window').click(function () {
     $('#lin').css('cursor', 'crosshair');
     $('#boxinfo').html(Settings.language.ADD_WINDOW_TEXT);
     $('#door_list').hide(200);
@@ -2205,29 +2278,29 @@ $('.window').click(function() {
     fonc_button('door_mode', this.id);
 });
 
-$('.object').click(function() {
+$('.object').click(function () {
     cursor('move');
     $('#boxinfo').html(Settings.language.ADD_OBJECT_TEXT);
     fonc_button('object_mode', this.id);
 });
 
-$('#stair_mode').click(function() {
+$('#stair_mode').click(function () {
     cursor('move');
     $('#boxinfo').html(Settings.language.ADD_STAIRS_TEXT);
     fonc_button('object_mode', 'simpleStair');
 });
 
-$('#node_mode').click(function() {
-    $('#boxinfo').html(Settings.language.CUT_WALL_TEXT+'<br/><span class="text-danger" style=\"font-size:0.7em\;">'+Settings.language.WALL_CUT_WARNING+'</span>');
+$('#node_mode').click(function () {
+    $('#boxinfo').html(Settings.language.CUT_WALL_TEXT + '<br/><span class="text-danger" style=\"font-size:0.7em\;">' + Settings.language.WALL_CUT_WARNING + '</span>');
     fonc_button('node_mode');
 });
 
-$('#text_mode').click(function() {
+$('#text_mode').click(function () {
     $('#boxinfo').html('Ajouter du texte<br/><span style=\"font-size:0.7em\">Amenez le curseur à l\'endroit voulu, puis tapez votre texte.</span>');
     fonc_button('text_mode');
 });
 
-$('#grid_mode').click(function() {
+$('#grid_mode').click(function () {
     if (grid_snap == 'on') {
         grid_snap = 'off';
         $('#boxinfo').html('Grille d\'aide off');
@@ -2235,7 +2308,8 @@ $('#grid_mode').click(function() {
         $('#grid_mode').addClass('btn-warning');
         $('#grid_mode').html('GRID OFF');
         $('#boxgrid').css('opacity', '0.5');
-    } else {
+    }
+    else {
         grid_snap = 'on';
         $('#boxinfo').html('Grille d\'aide on');
         $('#grid_mode').removeClass('btn-warning');

@@ -1,17 +1,17 @@
 document.querySelector('#lin').addEventListener("mouseup", _MOUSEUP);
-document.querySelector('#lin').addEventListener("mousemove", throttle(function(event) {
+document.querySelector('#lin').addEventListener("mousemove", throttle(function (event) {
     _MOUSEMOVE(event);
 }, 30));
 document.querySelector('#lin').addEventListener("mousedown", _MOUSEDOWN, true);
 
-$(document).on('click', '#lin', function(event) {
+$(document).on('click', '#lin', function (event) {
     event.preventDefault();
 });
 
-document.querySelector('#panel').addEventListener('mousemove', function(event) {
+document.querySelector('#panel').addEventListener('mousemove', function (event) {
     if ((mode == 'line_mode' || mode == 'partition_mode') && action == 1) {
         action = 0;
-        if (typeof(binder) != 'undefined') {
+        if (typeof (binder) != 'undefined') {
             binder.remove();
             delete binder;
         }
@@ -22,34 +22,25 @@ document.querySelector('#panel').addEventListener('mousemove', function(event) {
     }
 });
 
-window.addEventListener('resize', function(event) {
+window.addEventListener('resize', function (event) {
     width_viewbox = $('#lin').width();
     height_viewbox = $('#lin').height();
     document.querySelector('#lin').setAttribute('viewBox', originX_viewbox + ' ' + originY_viewbox + ' ' + width_viewbox + ' ' + height_viewbox)
 });
 
-$(document).keyup(function(event) {
+$(document).keyup(function (event) {
     var which = event.which;
-    if(which === 27) {
-        
+    if (which === 27) {
+
     }
 });
 
-/**
- * addWall - marks the wall being added. Each walls is assigned a uuid when added
- *
- * @param  {wall} wall\
- */
-function addWall(wall) {
-    // generate and assign a uuid to the wall
-    wall.id = generateUUID();
-    WALLS.push(wall);
-}
+
 
 // *****************************************************************************************************
 // ******************************        KEYPRESS on KEYBOARD          *********************************
 // *****************************************************************************************************
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keydown", function (event) {
     if (mode != "text_mode") {
         if (event.keyCode == '37') {
             //LEFT
@@ -88,6 +79,17 @@ document.addEventListener("keydown", function(event) {
 // ******************************        MOUSE MOVE          *******************************************
 // *****************************************************************************************************
 
+/**
+ * addWall - marks the wall being added. Each walls is assigned a uuid when added
+ *
+ * @param  {wall} wall\
+ */
+function addWall(wall) {
+    // generate and assign a uuid to the wall
+    wall.id = generateUUID();
+    WALLS.push(wall);
+}
+
 function _MOUSEMOVE(event) {
     event.preventDefault();
     $('.sub').hide(100);
@@ -97,7 +99,8 @@ function _MOUSEMOVE(event) {
     //**************************************************************************
     if (mode == 'text_mode') {
         snap = calcul_snap(event, grid_snap);
-        if (action == 0) cursor('text');
+        if (action == 0)
+            cursor('text');
         else {
             cursor('none');
         }
@@ -108,16 +111,18 @@ function _MOUSEMOVE(event) {
     //**************************************************************************
     if (mode == 'object_mode') {
         snap = calcul_snap(event, grid_snap);
-        if (typeof(binder) == 'undefined') {
+        if (typeof (binder) == 'undefined') {
             $('#object_list').hide(200);
-            if (modeOption == 'simpleStair') binder = new editor.obj2D("free", "stair", "simpleStair", snap, 0, 0, 0, "normal", 0, 15);
+            if (modeOption == 'simpleStair')
+                binder = new editor.obj2D("free", "stair", "simpleStair", snap, 0, 0, 0, "normal", 0, 15);
             else {
                 var typeObj = modeOption;
                 binder = new editor.obj2D("free", "energy", typeObj, snap, 0, 0, 0, "normal", 0);
             }
 
             $('#boxbind').append(binder.graph);
-        } else {
+        }
+        else {
 
             if ((binder.family != 'stick' && binder.family != 'collision') || WALLS.length == 0) {
                 binder.x = snap.x;
@@ -130,21 +135,25 @@ function _MOUSEMOVE(event) {
                 var found = false;
 
                 if (editor.rayCastingWalls({
-                        x: binder.bbox.left,
-                        y: binder.bbox.top
-                    })) found = true;
+                    x: binder.bbox.left,
+                    y: binder.bbox.top
+                }))
+                    found = true;
                 if (!found && editor.rayCastingWalls({
-                        x: binder.bbox.left,
-                        y: binder.bbox.bottom
-                    })) found = true;
+                    x: binder.bbox.left,
+                    y: binder.bbox.bottom
+                }))
+                    found = true;
                 if (!found && editor.rayCastingWalls({
-                        x: binder.bbox.right,
-                        y: binder.bbox.top
-                    })) found = true;
+                    x: binder.bbox.right,
+                    y: binder.bbox.top
+                }))
+                    found = true;
                 if (!found && editor.rayCastingWalls({
-                        x: binder.bbox.right,
-                        y: binder.bbox.bottom
-                    })) found = true;
+                    x: binder.bbox.right,
+                    y: binder.bbox.bottom
+                }))
+                    found = true;
 
                 if (!found) {
                     binder.x = snap.x;
@@ -152,7 +161,8 @@ function _MOUSEMOVE(event) {
                     binder.oldX = binder.x;
                     binder.oldY = binder.y;
                     binder.update();
-                } else {
+                }
+                else {
                     binder.x = binder.oldX;
                     binder.y = binder.oldY;
                     binder.update();
@@ -193,7 +203,7 @@ function _MOUSEMOVE(event) {
     //**************************************************************************
     if (mode == 'distance_mode') {
         snap = calcul_snap(event, grid_snap);
-        if (typeof(binder) == 'undefined') {
+        if (typeof (binder) == 'undefined') {
             cross = qSVG.create("boxbind", "path", {
                 d: "M-3000,0 L3000,0 M0,-3000 L0,3000",
                 "stroke-width": 0.5,
@@ -217,7 +227,8 @@ function _MOUSEMOVE(event) {
             });
             binder.graph.append(labelMeasure);
             $('#boxbind').append(binder.graph);
-        } else {
+        }
+        else {
             x = snap.x;
             y = snap.y;
             cross.attr({
@@ -252,7 +263,7 @@ function _MOUSEMOVE(event) {
         snap = calcul_snap(event, grid_snap);
         var roomTarget;
         if (roomTarget = editor.rayCastingRoom(snap)) {
-            if (typeof(binder) != 'undefined') {
+            if (typeof (binder) != 'undefined') {
                 binder.remove();
                 delete binder;
             }
@@ -285,8 +296,9 @@ function _MOUSEMOVE(event) {
             binder.type = 'room';
             binder.area = roomTarget.area;
             binder.id = ROOM.indexOf(roomTarget);
-        } else {
-            if (typeof(binder) != 'undefined') {
+        }
+        else {
+            if (typeof (binder) != 'undefined') {
                 binder.remove();
                 delete binder;
             }
@@ -303,7 +315,7 @@ function _MOUSEMOVE(event) {
         if (wallSelect = editor.nearWall(snap)) {
             var wall = wallSelect.wall;
             if (wall.type != 'separate') {
-                if (typeof(binder) == 'undefined') {
+                if (typeof (binder) == 'undefined') {
                     // family, classe, type, pos, angle, angleSign, size, hinge, thick
                     binder = new editor.obj2D("inWall", "doorWindow", modeOption, wallSelect, 0, 0, Settings.door.default, "normal", wall.thick);
                     var angleWall = qSVG.angleDeg(wall.start.x, wall.start.y, wall.end.x, wall.end.y);
@@ -329,7 +341,8 @@ function _MOUSEMOVE(event) {
                     binder.angle = angleWall;
                     binder.update();
                     $('#boxbind').append(binder.graph);
-                } else {
+                }
+                else {
                     var angleWall = qSVG.angleDeg(wall.start.x, wall.start.y, wall.end.x, wall.end.y);
                     var v1 = qSVG.vectorXY({
                         x: wall.start.x,
@@ -377,7 +390,7 @@ function _MOUSEMOVE(event) {
             }
         }
         else {
-            if (typeof(binder) != 'undefined') {
+            if (typeof (binder) != 'undefined') {
                 binder.graph.remove();
                 delete binder;
             }
@@ -392,7 +405,7 @@ function _MOUSEMOVE(event) {
 
         snap = calcul_snap(event, grid_snap);
 
-        if (typeof(binder) == 'undefined') {
+        if (typeof (binder) == 'undefined') {
             if (addNode = editor.nearWall(snap, 30)) {
                 var x2 = addNode.wall.end.x;
                 var y2 = addNode.wall.end.y;
@@ -415,7 +428,8 @@ function _MOUSEMOVE(event) {
                 binder.y1 = y1;
                 binder.y2 = y2;
             }
-        } else {
+        }
+        else {
             if (addNode = editor.nearWall(snap, 30)) {
                 if (addNode) {
                     var x2 = addNode.wall.end.x;
@@ -427,11 +441,13 @@ function _MOUSEMOVE(event) {
                         "transform": "translate(" + (addNode.x) + "," + (addNode.y) + ") rotate(" + (angleWall.deg + 90) + ",0,0)"
                     });
                     binder.data = addNode;
-                } else {
+                }
+                else {
                     binder.remove();
                     delete binder;
                 }
-            } else {
+            }
+            else {
                 binder.remove();
                 delete binder;
             }
@@ -455,13 +471,13 @@ function _MOUSEMOVE(event) {
             }
         }
         if (objTarget !== false) {
-            if (typeof(binder) != 'undefined' && (binder.type == 'segment')) {
+            if (typeof (binder) != 'undefined' && (binder.type == 'segment')) {
                 binder.graph.remove();
                 delete binder;
                 cursor('default');
             }
             if (objTarget.params.bindBox) { // OBJ -> BOUNDINGBOX TOOL
-                if (typeof(binder) == 'undefined') {
+                if (typeof (binder) == 'undefined') {
                     binder = new editor.obj2D("free", "boundingBox", "", objTarget.bbox.origin, objTarget.angle, 0, objTarget.size, "normal", objTarget.thick, objTarget.realBbox);
                     binder.update();
                     binder.obj = objTarget;
@@ -469,14 +485,17 @@ function _MOUSEMOVE(event) {
                     binder.oldX = binder.x;
                     binder.oldY = binder.y;
                     $('#boxbind').append(binder.graph);
-                    if (!objTarget.params.move) cursor('trash'); // LIKE MEASURE ON PLAN
-                    if (objTarget.params.move) cursor('move');
+                    if (!objTarget.params.move)
+                        cursor('trash'); // LIKE MEASURE ON PLAN
+                    if (objTarget.params.move)
+                        cursor('move');
                 }
             }
             else { // DOOR, WINDOW, APERTURE.. -- OBJ WITHOUT BINDBOX (params.bindBox = False) -- !!!!
-                if (typeof(binder) == 'undefined') {
+                if (typeof (binder) == 'undefined') {
                     var wallList = editor.rayCastingWall(objTarget);
-                    if (wallList.length > 1) wallList = wallList[0];
+                    if (wallList.length > 1)
+                        wallList = wallList[0];
                     inWallRib(wallList);
                     var thickObj = wallList.thick;
                     var sizeObj = objTarget.size;
@@ -496,7 +515,8 @@ function _MOUSEMOVE(event) {
                         binder.graph.get(0).firstChild.setAttribute("class", "circle_css_2");
                         binder.type = "obj";
                         binder.obj = objTarget;
-                    } else {
+                    }
+                    else {
                         cursor('default');
                         binder.graph.get(0).firstChild.setAttribute("class", "circle_css_1");
                         binder.type = false;
@@ -505,9 +525,11 @@ function _MOUSEMOVE(event) {
             }
         }
         else {
-            if (typeof(binder) != 'undefined') {
-                if (typeof(binder.graph) != 'undefined') binder.graph.remove();
-                else binder.remove();
+            if (typeof (binder) != 'undefined') {
+                if (typeof (binder.graph) != 'undefined')
+                    binder.graph.remove();
+                else
+                    binder.remove();
                 delete binder;
                 cursor('default');
                 rib();
@@ -517,7 +539,7 @@ function _MOUSEMOVE(event) {
 
         // BIND CIRCLE IF nearNode and GROUP ALL SAME XY SEG POINTS
         if (wallNode = editor.nearWallNode(snap, 20)) {
-            if (typeof(binder) == 'undefined' || binder.type == 'segment') {
+            if (typeof (binder) == 'undefined' || binder.type == 'segment') {
                 binder = qSVG.create('boxbind', 'circle', {
                     id: "circlebinder",
                     class: "circle_css_2",
@@ -527,7 +549,8 @@ function _MOUSEMOVE(event) {
                 });
                 binder.data = wallNode;
                 binder.type = "node";
-                if ($('#linebinder').length) $('#linebinder').remove();
+                if ($('#linebinder').length)
+                    $('#linebinder').remove();
             }
             else {
                 // REMAKE CIRCLE_CSS ON BINDER AND TAKE DATA SEG GROUP
@@ -540,7 +563,7 @@ function _MOUSEMOVE(event) {
             cursor('move');
         }
         else {
-            if (typeof(binder) != "undefined" && binder.type == 'node') {
+            if (typeof (binder) != "undefined" && binder.type == 'node') {
                 binder.remove();
                 delete binder;
                 hideAllSize();
@@ -554,10 +577,12 @@ function _MOUSEMOVE(event) {
         // Mouseover wall
 
         if (wallBind = editor.rayCastingWalls(snap, WALLS)) {
-            if (wallBind.length > 1) wallBind = wallBind[wallBind.length - 1];
-            if (wallBind && typeof(binder) == 'undefined') {
+            if (wallBind.length > 1)
+                wallBind = wallBind[wallBind.length - 1];
+            if (wallBind && typeof (binder) == 'undefined') {
                 var objWall = editor.objFromWall(wallBind);
-                if (objWall.length > 0) editor.inWallRib2(wallBind);
+                if (objWall.length > 0)
+                    editor.inWallRib2(wallBind);
                 binder = {};
                 binder.wall = wallBind;
                 inWallRib(binder.wall);
@@ -592,10 +617,11 @@ function _MOUSEMOVE(event) {
         }
         else {
             if (wallBind = editor.nearWall(snap, 6)) {
-                if (wallBind && typeof(binder) == 'undefined') {
+                if (wallBind && typeof (binder) == 'undefined') {
                     wallBind = wallBind.wall;
                     var objWall = editor.objFromWall(wallBind);
-                    if (objWall.length > 0) editor.inWallRib2(wallBind);
+                    if (objWall.length > 0)
+                        editor.inWallRib2(wallBind);
                     binder = {};
                     binder.wall = wallBind;
                     inWallRib(binder.wall);
@@ -629,7 +655,7 @@ function _MOUSEMOVE(event) {
                 }
             }
             else {
-                if (typeof(binder) != "undefined" && binder.type == 'segment') {
+                if (typeof (binder) != "undefined" && binder.type == 'segment') {
                     binder.graph.remove();
                     delete binder;
                     hideAllSize();
@@ -652,7 +678,8 @@ function _MOUSEMOVE(event) {
                 pox = helpConstruc.x;
                 poy = helpConstruc.y;
                 cursor('grab');
-            } else {
+            }
+            else {
                 cursor('crosshair');
             }
         }
@@ -660,7 +687,7 @@ function _MOUSEMOVE(event) {
             pox = wallNode.x;
             poy = wallNode.y;
             cursor('grab');
-            if (typeof(binder) == 'undefined') {
+            if (typeof (binder) == 'undefined') {
                 binder = qSVG.create('boxbind', 'circle', {
                     id: "circlebinder",
                     class: "circle_css_2",
@@ -670,11 +697,15 @@ function _MOUSEMOVE(event) {
                 });
             }
             intersectionOff();
-        } else {
-            if (!helpConstruc) cursor('crosshair');
-            if (typeof(binder) != "undefined") {
-                if (binder.graph) binder.graph.remove();
-                else binder.remove();
+        }
+        else {
+            if (!helpConstruc)
+                cursor('crosshair');
+            if (typeof (binder) != "undefined") {
+                if (binder.graph)
+                    binder.graph.remove();
+                else
+                    binder.remove();
                 delete binder;
             }
         }
@@ -699,10 +730,12 @@ function _MOUSEMOVE(event) {
                 wallStartConstruc = false;
                 if (wallNode.bestWall == WALLS.length - 1) {
                     cursor('validation');
-                } else {
+                }
+                else {
                     cursor('grab');
                 }
-            } else {
+            }
+            else {
                 cursor('crosshair');
             }
         }
@@ -710,7 +743,8 @@ function _MOUSEMOVE(event) {
         if (starter > grid) {
             if (!$('#line_construc').length) {
                 var ws = 20;
-                if (mode == 'partition_mode') ws = 10;
+                if (mode == 'partition_mode')
+                    ws = 10;
                 lineconstruc = qSVG.create("boxbind", "line", {
                     id: "line_construc",
                     x1: pox,
@@ -723,7 +757,7 @@ function _MOUSEMOVE(event) {
                     stroke: "#9fb2e2"
                 });
 
-                svgadd = qSVG.create("boxbind", "line", { // ORANGE TEMP LINE FOR ANGLE 0 90 45 -+
+                svgadd = qSVG.create("boxbind", "line", {// ORANGE TEMP LINE FOR ANGLE 0 90 45 -+
                     id: "linetemp",
                     x1: pox,
                     y1: poy,
@@ -733,7 +767,8 @@ function _MOUSEMOVE(event) {
                     "stroke-width": 0.5,
                     "stroke-opacity": "0.9"
                 });
-            } else { // THE LINES AND BINDER ARE CREATED
+            }
+            else { // THE LINES AND BINDER ARE CREATED
 
                 $('#linetemp').attr({
                     x2: x,
@@ -748,13 +783,14 @@ function _MOUSEMOVE(event) {
                     x = wallEndConstruc.x;
                     y = wallEndConstruc.y;
                     cursor('grab');
-                } else {
+                }
+                else {
                     cursor('crosshair');
                 }
 
                 // nearNode helped to attach the end of the construc line
                 if (wallNode = editor.nearWallNode(snap, 20)) {
-                    if (typeof(binder) == 'undefined') {
+                    if (typeof (binder) == 'undefined') {
                         binder = qSVG.create('boxbind', 'circle', {
                             id: "circlebinder",
                             class: "circle_css_2",
@@ -773,15 +809,18 @@ function _MOUSEMOVE(event) {
                     intersectionOff();
                     if (wallNode.bestWall == WALLS.length - 1 && document.getElementById("multi").checked) {
                         cursor('validation');
-                    } else {
+                    }
+                    else {
                         cursor('grab');
                     }
-                } else {
-                    if (typeof(binder) != "undefined") {
+                }
+                else {
+                    if (typeof (binder) != "undefined") {
                         binder.remove();
                         delete binder;
                     }
-                    if (wallEndConstruc === false) cursor('crosshair');
+                    if (wallEndConstruc === false)
+                        cursor('crosshair');
                 }
                 // LINETEMP AND LITLLE SNAPPING FOR HELP TO CONSTRUC ANGLE 0 90 45 *****************************************
                 var fltt = qSVG.angle(pox, poy, x, y);
@@ -789,7 +828,7 @@ function _MOUSEMOVE(event) {
                 var coeff = fltt.deg / flt; // -45 -> -1     45 -> 1
                 var phi = poy - (coeff * pox);
                 var Xdiag = (y - phi) / coeff;
-                if (typeof(binder) == 'undefined') {
+                if (typeof (binder) == 'undefined') {
                     // HELP FOR H LINE
                     var found = false;
                     if (flt < 15 && Math.abs(poy - y) < 25) {
@@ -804,12 +843,14 @@ function _MOUSEMOVE(event) {
                         x = Xdiag;
                         found = true;
                     }
-                    if (found) $('#line_construc').attr({
-                        "stroke-opacity": 1
-                    });
-                    else $('#line_construc').attr({
-                        "stroke-opacity": 0.7
-                    });
+                    if (found)
+                        $('#line_construc').attr({
+                            "stroke-opacity": 1
+                        });
+                    else
+                        $('#line_construc').attr({
+                            "stroke-opacity": 0.7
+                        });
                 }
                 $('#line_construc').attr({
                     x2: x,
@@ -826,7 +867,7 @@ function _MOUSEMOVE(event) {
                     x: x,
                     y: y
                 })) / 60).toFixed(2);
-                if (typeof(lengthTemp) == 'undefined') {
+                if (typeof (lengthTemp) == 'undefined') {
                     lengthTemp = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                     lengthTemp.setAttributeNS(null, 'x', startText.x);
                     lengthTemp.setAttributeNS(null, 'y', (startText.y) - 15);
@@ -837,13 +878,13 @@ function _MOUSEMOVE(event) {
                     lengthTemp.textContent = formatLength(valueText);
                     $('#boxbind').append(lengthTemp);
                 }
-                if (typeof(lengthTemp) != 'undefined' && valueText > 0.1) {
+                if (typeof (lengthTemp) != 'undefined' && valueText > 0.1) {
                     lengthTemp.setAttributeNS(null, 'x', startText.x);
                     lengthTemp.setAttributeNS(null, 'y', (startText.y) - 15);
                     lengthTemp.setAttribute("transform", "rotate(" + angleText.deg + " " + startText.x + "," + startText.y + ")");
                     lengthTemp.textContent = formatLength(valueText);
                 }
-                if (typeof(lengthTemp) != 'undefined' && valueText < 0.1) {
+                if (typeof (lengthTemp) != 'undefined' && valueText < 0.1) {
                     lengthTemp.textContent = "";
                 }
             }
@@ -902,8 +943,10 @@ function _MOUSEMOVE(event) {
             }
             else {
                 if (magnetic != false) {
-                    if (magnetic == "H") snap.x = coords.x;
-                    else snap.y = coords.y;
+                    if (magnetic == "H")
+                        snap.x = coords.x;
+                    else
+                        snap.y = coords.y;
                 }
                 if (helpConstruc = intersection(snap, 10, wallListRun)) {
                     coords.x = helpConstruc.x;
@@ -911,11 +954,14 @@ function _MOUSEMOVE(event) {
                     snap.x = helpConstruc.x;
                     snap.y = helpConstruc.y;
                     if (magnetic != false) {
-                        if (magnetic == "H") snap.x = coords.x;
-                        else snap.y = coords.y;
+                        if (magnetic == "H")
+                            snap.x = coords.x;
+                        else
+                            snap.y = coords.y;
                     }
                     cursor('grab');
-                } else {
+                }
+                else {
                     cursor('move');
                 }
                 $('#circlebinder').attr({
@@ -943,19 +989,22 @@ function _MOUSEMOVE(event) {
                 var angleWall = qSVG.angleDeg(wall.start.x, wall.start.y, wall.end.x, wall.end.y);
                 var limits = limitObj(wall.equations.base, 2 * wallListObj[k].distance, wallListObj[k].from); // COORDS OBJ AFTER ROTATION
                 var indexLimits = 0;
-                if (qSVG.btwn(limits[1].x, wall.start.x, wall.end.x) && qSVG.btwn(limits[1].y, wall.start.y, wall.end.y)) indexLimits = 1;
+                if (qSVG.btwn(limits[1].x, wall.start.x, wall.end.x) && qSVG.btwn(limits[1].y, wall.start.y, wall.end.y))
+                    indexLimits = 1;
                 // NEW COORDS OBJDATA[obj]
                 objTarget.x = limits[indexLimits].x;
                 objTarget.y = limits[indexLimits].y;
                 objTarget.angle = angleWall;
-                if (objTarget.angleSign == 1) objTarget.angle = angleWall + 180;
+                if (objTarget.angleSign == 1)
+                    objTarget.angle = angleWall + 180;
 
                 var limitBtwn = limitObj(wall.equations.base, objTarget.size, objTarget); // OBJ SIZE OK BTWN xy1/xy2
 
                 if (qSVG.btwn(limitBtwn[0].x, wall.start.x, wall.end.x) && qSVG.btwn(limitBtwn[0].y, wall.start.y, wall.end.y) && qSVG.btwn(limitBtwn[1].x, wall.start.x, wall.end.x) && qSVG.btwn(limitBtwn[1].y, wall.start.y, wall.end.y)) {
                     objTarget.limit = limitBtwn;
                     objTarget.update();
-                } else {
+                }
+                else {
                     objTarget.graph.remove();
                     delete objTarget;
                     OBJDATA.splice(wall.indexObj, 1);
@@ -976,9 +1025,11 @@ function _MOUSEMOVE(event) {
 
             if (equation2.A == 'v') {
                 equation2.B = snap.x;
-            } else if (equation2.A == 'h') {
+            }
+            else if (equation2.A == 'h') {
                 equation2.B = snap.y;
-            } else {
+            }
+            else {
                 equation2.B = snap.y - (snap.x * equation2.A);
             }
 
@@ -987,15 +1038,21 @@ function _MOUSEMOVE(event) {
             var intersection3 = qSVG.intersectionOfEquations(equation1, equation3, "obj");
 
             if (binder.wall.parent != null) {
-                if (isObjectsEquals(binder.wall.parent.end, binder.wall.start)) binder.wall.parent.end = intersection1;
-                else if (isObjectsEquals(binder.wall.parent.start, binder.wall.start)) binder.wall.parent.start = intersection1;
-                else binder.wall.parent.end = intersection1;
+                if (isObjectsEquals(binder.wall.parent.end, binder.wall.start))
+                    binder.wall.parent.end = intersection1;
+                else if (isObjectsEquals(binder.wall.parent.start, binder.wall.start))
+                    binder.wall.parent.start = intersection1;
+                else
+                    binder.wall.parent.end = intersection1;
             }
 
             if (binder.wall.child != null) {
-                if (isObjectsEquals(binder.wall.child.start, binder.wall.end)) binder.wall.child.start = intersection2;
-                else if (isObjectsEquals(binder.wall.child.end, binder.wall.end)) binder.wall.child.end = intersection2;
-                else binder.wall.child.start = intersection2;
+                if (isObjectsEquals(binder.wall.child.start, binder.wall.end))
+                    binder.wall.child.start = intersection2;
+                else if (isObjectsEquals(binder.wall.child.end, binder.wall.end))
+                    binder.wall.child.end = intersection2;
+                else
+                    binder.wall.child.start = intersection2;
             }
 
             binder.wall.start = intersection1;
@@ -1017,10 +1074,12 @@ function _MOUSEMOVE(event) {
                     var distanceFromEnd = qSVG.gap(equation1.backUp.end, intersection1);
                     if (distanceFromStart > distanceFromEnd) { // NEAR FROM End
                         equation1.follow.end = intersection1;
-                    } else {
+                    }
+                    else {
                         equation1.follow.start = intersection1;
                     }
-                } else {
+                }
+                else {
                     equation1.follow.end = equation1.backUp.end;
                     equation1.follow.start = equation1.backUp.start;
                 }
@@ -1031,10 +1090,12 @@ function _MOUSEMOVE(event) {
                     var distanceFromEnd = qSVG.gap(equation3.backUp.end, intersection2);
                     if (distanceFromStart > distanceFromEnd) { // NEAR FROM End
                         equation3.follow.end = intersection2;
-                    } else {
+                    }
+                    else {
                         equation3.follow.start = intersection2;
                     }
-                } else {
+                }
+                else {
                     equation3.follow.end = equation3.backUp.end;
                     equation3.follow.start = equation3.backUp.start;
                 }
@@ -1198,7 +1259,8 @@ function _MOUSEMOVE(event) {
                 }
             }
         } // END OBJ MOVE
-        if (binder.type != 'obj' && binder.type != 'segment') rib();
+        if (binder.type != 'obj' && binder.type != 'segment')
+            rib();
     }
     // ENDBIND ACTION MOVE **************************************************************************
 
@@ -1250,7 +1312,8 @@ function _MOUSEDOWN(event) {
                 pox = wallStartConstruc.x;
                 poy = wallStartConstruc.y;
             }
-        } else {
+        }
+        else {
             // FINALIZE LINE_++
             construc = 1;
         }
@@ -1265,7 +1328,7 @@ function _MOUSEDOWN(event) {
     // **********************   SELECT MODE + BIND   *********************
     // *******************************************************************
     if (mode == 'select_mode') {
-        if (typeof(binder) != 'undefined' && (binder.type == 'segment' || binder.type == 'node' || binder.type == 'obj' || binder.type == 'boundingBox')) {
+        if (typeof (binder) != 'undefined' && (binder.type == 'segment' || binder.type == 'node' || binder.type == 'obj' || binder.type == 'boundingBox')) {
             mode = 'bind_mode';
 
             if (binder.type == 'obj') {
@@ -1298,10 +1361,12 @@ function _MOUSEDOWN(event) {
                     }
                 }
                 if (wallListRun[0].child != null) {
-                    if (isObjectsEquals(wallListRun[0].child.start, nodeControl) || isObjectsEquals(wallListRun[0].child.end, nodeControl)) wallListRun.push(wallListRun[0].child);
+                    if (isObjectsEquals(wallListRun[0].child.start, nodeControl) || isObjectsEquals(wallListRun[0].child.end, nodeControl))
+                        wallListRun.push(wallListRun[0].child);
                 }
                 if (wallListRun[0].parent != null) {
-                    if (isObjectsEquals(wallListRun[0].parent.start, nodeControl) || isObjectsEquals(wallListRun[0].parent.end, nodeControl)) wallListRun.push(wallListRun[0].parent);
+                    if (isObjectsEquals(wallListRun[0].parent.start, nodeControl) || isObjectsEquals(wallListRun[0].parent.end, nodeControl))
+                        wallListRun.push(wallListRun[0].parent);
                 }
 
                 for (var k in wallListRun) {
@@ -1341,8 +1406,10 @@ function _MOUSEDOWN(event) {
                         var found = true;
                         for (var k in WALLS) {
                             if (qSVG.rayCasting(wall.start, WALLS[k].coords) && !isObjectsEquals(WALLS[k], wall.parent) && !isObjectsEquals(WALLS[k], wall)) {
-                                if (wall.parent.parent != null && isObjectsEquals(wall, wall.parent.parent)) wall.parent.parent = null;
-                                if (wall.parent.child != null && isObjectsEquals(wall, wall.parent.child)) wall.parent.child = null;
+                                if (wall.parent.parent != null && isObjectsEquals(wall, wall.parent.parent))
+                                    wall.parent.parent = null;
+                                if (wall.parent.child != null && isObjectsEquals(wall, wall.parent.child))
+                                    wall.parent.child = null;
                                 wall.parent = null;
                                 found = false;
                                 break;
@@ -1359,7 +1426,8 @@ function _MOUSEDOWN(event) {
                                 wall.parent.child = newWall;
                                 wall.parent = newWall;
                                 equation1 = qSVG.perpendicularEquation(equation2, wall.start.x, wall.start.y);
-                            } else if (isObjectsEquals(wall.parent.start, wall.start, "2")) {
+                            }
+                            else if (isObjectsEquals(wall.parent.start, wall.start, "2")) {
                                 newWall = new editor.wall(wall.parent.start, wall.start, "normal", wall.thick);
                                 // WALLS.push(newWall);
                                 addWall(newWall);
@@ -1378,7 +1446,8 @@ function _MOUSEDOWN(event) {
                     for (var k in WALLS) {
                         if (qSVG.rayCasting(wall.start, WALLS[k].coords) && !isObjectsEquals(WALLS[k].coords, wall.coords)) {
                             var angleFollow = qSVG.angleBetweenEquations(WALLS[k].equations.base.A, equation2.A);
-                            if (angleFollow < 20 || angleFollow > 160) break;
+                            if (angleFollow < 20 || angleFollow > 160)
+                                break;
                             equation1 = editor.createEquationFromWall(WALLS[k]);
                             equation1.follow = WALLS[k];
                             equation1.backUp = {
@@ -1392,7 +1461,8 @@ function _MOUSEDOWN(event) {
                             break;
                         }
                     }
-                    if (!foundEq) equation1 = qSVG.perpendicularEquation(equation2, wall.start.x, wall.start.y);
+                    if (!foundEq)
+                        equation1 = qSVG.perpendicularEquation(equation2, wall.start.x, wall.start.y);
                 }
 
                 if (wall.child != null) {
@@ -1402,8 +1472,10 @@ function _MOUSEDOWN(event) {
                         var found = true;
                         for (var k in WALLS) {
                             if (qSVG.rayCasting(wall.end, WALLS[k].coords) && !isObjectsEquals(WALLS[k], wall.child) && !isObjectsEquals(WALLS[k], wall)) {
-                                if (wall.child.parent != null && isObjectsEquals(wall, wall.child.parent)) wall.child.parent = null;
-                                if (wall.child.child != null && isObjectsEquals(wall, wall.child.child)) wall.child.child = null;
+                                if (wall.child.parent != null && isObjectsEquals(wall, wall.child.parent))
+                                    wall.child.parent = null;
+                                if (wall.child.child != null && isObjectsEquals(wall, wall.child.child))
+                                    wall.child.child = null;
                                 wall.child = null;
                                 found = false;
                                 break;
@@ -1419,7 +1491,8 @@ function _MOUSEDOWN(event) {
                                 wall.child.parent = newWall;
                                 wall.child = newWall;
                                 equation3 = qSVG.perpendicularEquation(equation2, wall.end.x, wall.end.y);
-                            } else if (isObjectsEquals(wall.child.end, wall.end)) {
+                            }
+                            else if (isObjectsEquals(wall.child.end, wall.end)) {
                                 var newWall = new editor.wall(wall.end, wall.child.end, "normal", wall.thick);
                                 // WALLS.push(newWall);
                                 addWall(newWall);
@@ -1438,7 +1511,8 @@ function _MOUSEDOWN(event) {
                     for (var k in WALLS) {
                         if (qSVG.rayCasting(wall.end, WALLS[k].coords) && !isObjectsEquals(WALLS[k].coords, wall.coords, "4")) {
                             var angleFollow = qSVG.angleBetweenEquations(WALLS[k].equations.base.A, equation2.A);
-                            if (angleFollow < 20 || angleFollow > 160) break;
+                            if (angleFollow < 20 || angleFollow > 160)
+                                break;
                             equation3 = editor.createEquationFromWall(WALLS[k]);
                             equation3.follow = WALLS[k];
                             equation3.backUp = {
@@ -1452,7 +1526,8 @@ function _MOUSEDOWN(event) {
                             break;
                         }
                     }
-                    if (!foundEq) equation3 = qSVG.perpendicularEquation(equation2, wall.end.x, wall.end.y);
+                    if (!foundEq)
+                        equation3 = qSVG.perpendicularEquation(equation2, wall.end.x, wall.end.y);
                 }
 
                 equationFollowers = [];
@@ -1485,7 +1560,8 @@ function _MOUSEDOWN(event) {
                 }
                 action = 1;
             }
-        } else {
+        }
+        else {
             action = 0;
             drag = 'on';
             snap = calcul_snap(event, grid_snap);
@@ -1504,11 +1580,12 @@ function _MOUSEDOWN(event) {
 //**********************************  ******************************************************************
 
 function _MOUSEUP(event) {
-    if (showRib) $('#boxScale').show(200);
+    if (showRib)
+        $('#boxScale').show(200);
     drag = 'off';
     cursor('default');
     if (mode == 'select_mode') {
-        if (typeof(binder) != 'undefined') {
+        if (typeof (binder) != 'undefined') {
             binder.remove();
             delete binder;
             save();
@@ -1533,8 +1610,10 @@ function _MOUSEUP(event) {
         OBJDATA.push(binder);
         binder.graph.remove();
         var targetBox = 'boxcarpentry';
-        if (OBJDATA[OBJDATA.length - 1].class == 'energy') targetBox = 'boxEnergy';
-        if (OBJDATA[OBJDATA.length - 1].class == 'furniture') targetBox = 'boxFurniture';
+        if (OBJDATA[OBJDATA.length - 1].class == 'energy')
+            targetBox = 'boxEnergy';
+        if (OBJDATA[OBJDATA.length - 1].class == 'furniture')
+            targetBox = 'boxFurniture';
         $('#' + targetBox).append(OBJDATA[OBJDATA.length - 1].graph);
         delete binder;
         $('#boxinfo').html('Object added');
@@ -1559,18 +1638,18 @@ function _MOUSEUP(event) {
             };
             binder.bbox = bbox;
             binder.realBbox = [{
-                x: binder.bbox.x,
-                y: binder.bbox.y
-            }, {
-                x: binder.bbox.x + binder.bbox.width,
-                y: binder.bbox.y
-            }, {
-                x: binder.bbox.x + binder.bbox.width,
-                y: binder.bbox.y + binder.bbox.height
-            }, {
-                x: binder.bbox.x,
-                y: binder.bbox.y + binder.bbox.height
-            }];
+                    x: binder.bbox.x,
+                    y: binder.bbox.y
+                }, {
+                    x: binder.bbox.x + binder.bbox.width,
+                    y: binder.bbox.y
+                }, {
+                    x: binder.bbox.x + binder.bbox.width,
+                    y: binder.bbox.y + binder.bbox.height
+                }, {
+                    x: binder.bbox.x,
+                    y: binder.bbox.y + binder.bbox.height
+                }];
             binder.size = binder.bbox.width;
             binder.thick = binder.bbox.height;
             binder.graph.append(labelMeasure);
@@ -1593,7 +1672,7 @@ function _MOUSEUP(event) {
 
     if (mode == 'room_mode') {
 
-        if (typeof(binder) == "undefined") {
+        if (typeof (binder) == "undefined") {
             return false;
         }
 
@@ -1607,22 +1686,25 @@ function _MOUSEUP(event) {
         $('.size').html(formatArea(area));
 
         $('#roomIndex').val(binder.id);
-        if (ROOM[binder.id].surface != '') $('#roomSurface').val(ROOM[binder.id].surface);
-        else $('#roomSurface').val('');
+        if (ROOM[binder.id].surface != '')
+            $('#roomSurface').val(ROOM[binder.id].surface);
+        else
+            $('#roomSurface').val('');
         document.querySelector('#seeArea').checked = ROOM[binder.id].showSurface;
         document.querySelector('#roomBackground').value = ROOM[binder.id].color;
         var roomName = ROOM[binder.id].name;
         document.querySelector('#roomName').value = roomName;
         if (ROOM[binder.id].name != '') {
             document.querySelector('#roomLabel').innerHTML = roomName + ' <span class="caret"></span>';
-        } else {
+        }
+        else {
             document.querySelector('#roomLabel').innerHTML = 'None <span class="caret"></span>';
         }
 
         var actionToDo = ROOM[binder.id].action;
         document.querySelector('#' + actionToDo + 'Action').checked = true;
         $('#panel').hide(100);
-        $('#roomTools').show('300', function() {
+        $('#roomTools').show('300', function () {
             $('#lin').css('cursor', 'default');
             $('#boxinfo').html('Config. the room');
         });
@@ -1635,7 +1717,7 @@ function _MOUSEUP(event) {
     // *******************************************************************
 
     if (mode == 'node_mode') {
-        if (typeof(binder) != 'undefined') { // ALSO ON MOUSEUP WITH HAVE CIRCLEBINDER ON ADDPOINT
+        if (typeof (binder) != 'undefined') { // ALSO ON MOUSEUP WITH HAVE CIRCLEBINDER ON ADDPOINT
             var newWall = new editor.wall({
                 x: binder.data.x,
                 y: binder.data.y
@@ -1659,7 +1741,7 @@ function _MOUSEUP(event) {
 
     if (mode == 'door_mode') {
         // crumb: new door
-        if (typeof(binder) == "undefined") {
+        if (typeof (binder) == "undefined") {
             $('#boxinfo').html('The plan currently contains no wall.');
             fonc_button('select_mode');
             return false;
@@ -1687,7 +1769,7 @@ function _MOUSEUP(event) {
         intersectionOff();
 
         // Nothing to do since we don't have an x nor y to calculate the distance
-        if(typeof x === 'undefined' && typeof y === 'undefined')
+        if (typeof x === 'undefined' && typeof y === 'undefined')
             return;
 
         var sizeWall = qSVG.measure({
@@ -1701,7 +1783,8 @@ function _MOUSEUP(event) {
         sizeWall = sizeWall / meter;
         if ($('#line_construc').length && sizeWall > 0.3) {
             var sizeWall = wallSize;
-            if (mode == 'partition_mode') sizeWall = partitionSize;
+            if (mode == 'partition_mode')
+                sizeWall = partitionSize;
             var wall = new editor.wall({
                 x: pox,
                 y: poy
@@ -1719,7 +1802,8 @@ function _MOUSEUP(event) {
                 cursor('validation');
                 action = 1;
             }
-            else action = 0;
+            else
+                action = 0;
             $('#boxinfo').html('Wall added <span style=\'font-size:0.6em\'>Moy. ' + (qSVG.measure({
                 x: pox,
                 y: poy
@@ -1731,7 +1815,8 @@ function _MOUSEUP(event) {
             lengthTemp.remove();
             delete lengthTemp;
             construc = 0;
-            if (wallEndConstruc) action = 0;
+            if (wallEndConstruc)
+                action = 0;
             delete wallEndConstruc;
             pox = x;
             poy = y;
@@ -1742,7 +1827,7 @@ function _MOUSEUP(event) {
             construc = 0;
             $('#boxinfo').html('Select mode');
             fonc_button('select_mode');
-            if (typeof(binder) != 'undefined') {
+            if (typeof (binder) != 'undefined') {
                 binder.remove();
                 delete binder;
             }
@@ -1760,7 +1845,7 @@ function _MOUSEUP(event) {
     if (mode == 'bind_mode') {
         action = 0;
         construc = 0; // CONSTRUC 0 TO FREE BINDER GROUP NODE WALL MOVING
-        if (typeof(binder) != 'undefined') {
+        if (typeof (binder) != 'undefined') {
             fonc_button('select_mode');
             if (binder.type == 'node') {
 
@@ -1777,14 +1862,16 @@ function _MOUSEUP(event) {
                     $('#panel').hide(100);
                     var objWall = editor.objFromWall(wallBind);
                     $('#boxinfo').html('Modify a wall<br/><span style="font-size:0.7em;color:#de9b43">This wall can\'t become a separation (contains doors or windows) !</span>');
-                    if (objWall.length > 0) $('#separate').hide();
+                    if (objWall.length > 0)
+                        $('#separate').hide();
                     else if (binder.wall.type == 'separate') {
                         $('#separate').hide();
                         $('#rangeThick').hide();
                         $('#recombine').show();
                         $('#cutWall').hide();
                         document.getElementById('titleWallTools').textContent = "Modify the separation";
-                    } else {
+                    }
+                    else {
                         $('#cutWall').show();
                         $('#separate').show();
                         $('#rangeThick').show();
@@ -1795,7 +1882,7 @@ function _MOUSEUP(event) {
                     $('#wallTools').show(200);
                     document.getElementById('wallWidth').setAttribute('min', Settings.wall.min);
                     document.getElementById('wallWidth').setAttribute('max', Settings.wall.max);
-                    document.getElementById('wallWidthScale').textContent = formatSmallLength(Settings.wall.min, false)+'-'+formatSmallLength(Settings.wall.max, false);
+                    document.getElementById('wallWidthScale').textContent = formatSmallLength(Settings.wall.min, false) + '-' + formatSmallLength(Settings.wall.max, false);
                     document.getElementById("wallWidth").value = binder.wall.thick;
                     // Wall thickness **__
                     document.getElementById("wallWidthVal").textContent = formatSmallLength(binder.wall.thick);
@@ -1811,7 +1898,7 @@ function _MOUSEUP(event) {
                 var moveObj = Math.abs(binder.oldXY.x - binder.x) + Math.abs(binder.oldXY.y - binder.y);
                 if (moveObj < 1) {
                     $('#panel').hide(100);
-                    $('#objTools').show('200', function() {
+                    $('#objTools').show('200', function () {
                         $('#lin').css('cursor', 'default');
                         $('#boxinfo').html('Config. the door/window');
                         document.getElementById('doorWindowWidth').setAttribute('min', binder.obj.params.resizeLimit.width.min);
@@ -1825,7 +1912,8 @@ function _MOUSEUP(event) {
                     });
                     mode = 'edit_door_mode';
 
-                } else {
+                }
+                else {
                     mode = "select_mode";
                     action = 0;
                     binder.graph.remove();
@@ -1833,7 +1921,7 @@ function _MOUSEUP(event) {
                 }
             }
 
-            if (typeof(binder) != 'undefined' && binder.type == 'boundingBox') {
+            if (typeof (binder) != 'undefined' && binder.type == 'boundingBox') {
                 var moveObj = Math.abs(binder.oldX - binder.x) + Math.abs(binder.oldY - binder.y);
                 var objTarget = binder.obj;
                 if (!objTarget.params.move) {
@@ -1843,12 +1931,16 @@ function _MOUSEUP(event) {
                     $('#boxinfo').html('Measure deleted !');
                 }
                 if (moveObj < 1 && objTarget.params.move) {
-                    if (!objTarget.params.resize) $('#objBoundingBoxScale').hide();
-                    else $('#objBoundingBoxScale').show();
-                    if (!objTarget.params.rotate) $('#objBoundingBoxRotation').hide();
-                    else $('#objBoundingBoxRotation').show();
+                    if (!objTarget.params.resize)
+                        $('#objBoundingBoxScale').hide();
+                    else
+                        $('#objBoundingBoxScale').show();
+                    if (!objTarget.params.rotate)
+                        $('#objBoundingBoxRotation').hide();
+                    else
+                        $('#objBoundingBoxRotation').show();
                     $('#panel').hide(100);
-                    $('#objBoundingBox').show('200', function() {
+                    $('#objBoundingBox').show('200', function () {
                         $('#lin').css('cursor', 'default');
                         $('#boxinfo').html('Modify the object');
                         document.getElementById('bboxWidth').setAttribute('min', objTarget.params.resizeLimit.width.min);
@@ -1870,7 +1962,8 @@ function _MOUSEUP(event) {
                         document.getElementById("bboxRotationVal").textContent = objTarget.angle;
                     });
                     mode = 'edit_boundingBox_mode';
-                } else {
+                }
+                else {
                     mode = "select_mode";
                     action = 0;
                     binder.graph.remove();

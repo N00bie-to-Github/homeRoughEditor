@@ -4,7 +4,7 @@ var METRIC = 2;
 
 var Settings = {
     unitSystem: IMPERIAL,
-    imperial:  {
+    imperial: {
         decimalPlaces: 3,
         fraction: 16
     },
