@@ -31,7 +31,7 @@ window.addEventListener('resize', function (event) {
 $(document).keyup(function (event) {
     var which = event.which;
     if (which === 27) {
-
+        console.log(typeof wall)
     }
 });
 
@@ -683,7 +683,7 @@ function _MOUSEMOVE(event) {
                 cursor('crosshair');
             }
         }
-        if (wallNode = editor.nearWallNode(snap, 20)) {
+        if (wallNode = editor.nearWallNode(snap, 20)) { 
             pox = wallNode.x;
             poy = wallNode.y;
             cursor('grab');
@@ -701,11 +701,13 @@ function _MOUSEMOVE(event) {
         else {
             if (!helpConstruc)
                 cursor('crosshair');
-            if (typeof (binder) != "undefined") {
-                if (binder.graph)
+            if (typeof (binder) != "undefined") { 
+                if (binder.graph) {
                     binder.graph.remove();
-                else
+                }
+                else { 
                     binder.remove();
+                }
                 delete binder;
             }
         }
@@ -716,7 +718,6 @@ function _MOUSEMOVE(event) {
     // ******************************************************************************************************
 
     if (action == 1 && (mode == 'line_mode' || mode == 'partition_mode')) {
-
         snap = calcul_snap(event, grid_snap);
         x = snap.x;
         y = snap.y;
@@ -1763,7 +1764,7 @@ function _MOUSEUP(event) {
     // ********************   LINE MODE MOUSE UP   ***********************
     // *******************************************************************
 
-    if (mode == 'line_mode' || mode == 'partition_mode') {
+    if (mode == 'line_mode' || mode == 'partition_mode') { 
         $('#linetemp').remove(); // DEL LINE HELP CONSTRUC 0 45 90
 
         intersectionOff();
@@ -1785,6 +1786,7 @@ function _MOUSEUP(event) {
             var sizeWall = wallSize;
             if (mode == 'partition_mode')
                 sizeWall = partitionSize;
+
             var wall = new editor.wall({
                 x: pox,
                 y: poy

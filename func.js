@@ -2203,8 +2203,8 @@ function fonc_button(modesetting, option) {
     if (option != 'simpleStair') {
         $('#' + modesetting).removeClass('btn-default');
         $('#' + modesetting).addClass('btn-success');
-
     }
+    
     mode = modesetting;
     modeOption = option;
 

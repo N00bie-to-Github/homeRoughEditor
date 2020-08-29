@@ -7,6 +7,13 @@ add listener for delete button
 
 the zero line separator currently looks like a crop button. Fix
 
+Enable the initial zoom level to be set in config
+
+Make grid size configurable
+
+// Currently:
+// Escape cancellation
+
 
 // Common commands
 py -m http.server

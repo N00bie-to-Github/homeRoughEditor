@@ -85,3 +85,29 @@ function formatLength(length) {
     // Return metric by default
     return length + ' m';
 }
+
+function convertMetric(from, to) {
+    var components = from.split(' ');
+    
+    var table = {
+        Gm: 9,
+        Mm: 6,
+        km: 3,
+        m: 1,
+        dm: -1,
+        cm: -2,
+        mm: -3,
+        um: -6,
+        μm: -6,
+        nm: -9,
+        pm: -12,
+        fm: -15
+    };
+    
+    var multiplier = Math.pow(10, (table[components[1]] - table[to]));
+    
+    return components[0] * multiplier;
+}
+
+
+console.log(convertMetric('1 nm', 'cm'))
